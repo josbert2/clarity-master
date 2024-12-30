@@ -1,0 +1,14 @@
+{
+  "name": "cli-generated-registry",
+  "module": "index.ts",
+  "type": "module",
+  "devDependencies": {
+    "@types/bun": "latest"
+  },
+  "bin": {
+    "generated-registry": "packages/cli/index.ts"
+  },
+  "peerDependencies": {
+    "typescript": "^5.0.0"
+  }
+}
