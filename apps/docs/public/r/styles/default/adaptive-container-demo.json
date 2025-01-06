@@ -1,0 +1,16 @@
+{
+  "name": "adaptive-container-demo",
+  "type": "registry:example",
+  "registryDependencies": [
+    "adaptive-container",
+    "button"
+  ],
+  "files": [
+    {
+      "path": "example/adaptive-container-demo.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\n\nimport { Button } from \"@/components/ui/button\"\nimport { AdaptiveContainer } from \"@/registry/default/annui/adaptive-container\"\n\nexport default function AdaptiveContainerDemo() {\n  const [expanded, setExpanded] = React.useState(false)\n  return (\n    <AdaptiveContainer className=\"bg-muted rounded-lg p-6\">\n      <h2 className=\"text-2xl font-bold mb-4\">Adaptive Content</h2>\n      <p className=\"mb-4\">\n        This is a component that adapts to content size changes. Click the\n        button below to change the content size.\n      </p>\n      {expanded && (\n        <p className=\"mb-4\">\n          This is additional content that only shows when expanded. It increases\n          the component's height, and you can observe how the component smoothly\n          adjusts its size to accommodate the new content.\n        </p>\n      )}\n      <Button onClick={() => setExpanded(!expanded)}>\n        {expanded ? \"Collapse\" : \"Expand\"}\n      </Button>\n    </AdaptiveContainer>\n  )\n}\n",
+      "type": "registry:example",
+      "target": ""
+    }
+  ]
+}

@@ -1,0 +1,16 @@
+{
+  "name": "colored-label",
+  "type": "registry:ui",
+  "dependencies": [
+    "colord",
+    "@radix-ui/react-slot"
+  ],
+  "files": [
+    {
+      "path": "annui/colored-label.tsx",
+      "content": "import * as React from \"react\"\nimport { Slot } from \"@radix-ui/react-slot\"\nimport { colord } from \"colord\"\n\nimport { cn } from \"@/registry/default/lib/utils\"\n\ninterface ColoredLabelProps extends React.ComponentPropsWithoutRef<\"div\"> {\n  color?: string\n  darkColor?: string\n  bgOpacity?: number\n  textOpacity?: number\n  darkBgOpacity?: number\n  darkTextOpacity?: number\n}\n\nconst ColoredLabel = React.forwardRef<\n  React.ComponentRef<\"div\">,\n  ColoredLabelProps & { asChild?: boolean }\n>(\n  (\n    {\n      children,\n      className,\n      color,\n      darkColor = color,\n      bgOpacity = 0.1,\n      textOpacity = 1,\n      darkBgOpacity = bgOpacity,\n      darkTextOpacity = textOpacity,\n      asChild,\n      ...props\n    },\n    ref\n  ) => {\n    const Comp = asChild ? Slot : \"div\"\n\n    return (\n      <Comp\n        ref={ref}\n        className={cn(\n          \"rounded-md text-xs px-1.5 py-0.5 w-fit font-medium bg-[var(--bg-color)] text-[var(--text-color)] dark:bg-[var(--dark-bg-color)] dark:text-[var(--dark-text-color)]\",\n          className\n        )}\n        style={\n          {\n            \"--bg-color\": color\n              ? colord(color).alpha(bgOpacity).toRgbString()\n              : undefined,\n            \"--text-color\": color\n              ? colord(color).alpha(textOpacity).toRgbString()\n              : undefined,\n            \"--dark-bg-color\": darkColor\n              ? colord(darkColor).alpha(darkBgOpacity).toRgbString()\n              : undefined,\n            \"--dark-text-color\": darkColor\n              ? colord(darkColor).alpha(darkTextOpacity).toRgbString()\n              : undefined,\n          } as React.CSSProperties\n        }\n        {...props}\n      >\n        {children}\n      </Comp>\n    )\n  }\n)\nColoredLabel.displayName = \"ColoredLabel\"\n\nexport { ColoredLabel }\n",
+      "type": "registry:ui",
+      "target": ""
+    }
+  ]
+}

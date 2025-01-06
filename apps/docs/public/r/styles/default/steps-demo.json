@@ -1,0 +1,15 @@
+{
+  "name": "steps-demo",
+  "type": "registry:example",
+  "registryDependencies": [
+    "steps"
+  ],
+  "files": [
+    {
+      "path": "example/steps-demo.tsx",
+      "content": "\"use client\"\n\nimport { toast } from \"sonner\"\n\nimport { Button } from \"@/components/ui/button\"\nimport { Input } from \"@/components/ui/input\"\nimport {\n  StepContent,\n  StepCurrent,\n  StepDescription,\n  StepFinish,\n  StepFinishedContent,\n  StepFooter,\n  StepHeader,\n  StepItem,\n  StepList,\n  StepNext,\n  StepNotFinishedContent,\n  StepPrev,\n  StepReset,\n  Steps,\n  StepTitle,\n  StepTotal,\n} from \"@/registry/default/annui/steps\"\n\nexport default function StepsDemo() {\n  return (\n    <div className=\"flex flex-col gap-4 bg-muted min-w-[300px] rounded-md p-4\">\n      <Steps onFinish={() => toast.success(\"Finished!\")}>\n        <StepHeader>\n          <StepTitle>Register</StepTitle>\n          <StepDescription>\n            Register your account to get started.\n          </StepDescription>\n        </StepHeader>\n        <StepList>\n          <StepItem value=\"register\" />\n          <StepItem value=\"verify\" />\n          <StepItem value=\"complete\" />\n        </StepList>\n        <div className=\"py-4\">\n          <StepContent className=\"flex flex-col gap-2\" value=\"register\">\n            <Input placeholder=\"Email\" />\n            <Input placeholder=\"Password\" />\n          </StepContent>\n          <StepContent className=\"flex flex-col gap-2\" value=\"verify\">\n            <Input placeholder=\"Verification Code\" />\n          </StepContent>\n          <StepContent className=\"flex flex-col gap-2\" value=\"complete\">\n            <Input placeholder=\"Complete\" />\n          </StepContent>\n          <StepFinishedContent>\n            You have finished all steps!\n          </StepFinishedContent>\n        </div>\n        <StepFooter>\n          <StepNotFinishedContent className=\"flex items-center gap-2 w-full\">\n            <StepPrev className=\"mr-auto data-[step-is-first=true]:inline-flex\">\n              Prev\n            </StepPrev>\n            <div className=\"flex items-center gap-1 mx-auto\">\n              <StepCurrent />/<StepTotal />\n            </div>\n            <StepNext className=\"ml-auto\">Next</StepNext>\n            <StepFinish className=\"ml-auto\">Finish</StepFinish>\n          </StepNotFinishedContent>\n          <StepFinishedContent className=\"flex items-center gap-2 w-full\">\n            <Button variant=\"outline\">Go to Home</Button>\n            <StepReset className=\"ml-auto\">Reset</StepReset>\n          </StepFinishedContent>\n        </StepFooter>\n      </Steps>\n    </div>\n  )\n}\n",
+      "type": "registry:example",
+      "target": ""
+    }
+  ]
+}

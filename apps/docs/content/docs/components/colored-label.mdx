@@ -1,0 +1,74 @@
+---
+title: Colored Label
+description: A component that allows you to create a colored label.
+---
+
+<ComponentPreview name="colored-label-demo" />
+
+<ComponentInstall>
+
+<CLIInstall>
+
+```bash
+npx shadcn@latest add https://annui.org/r/colored-label
+```
+
+</CLIInstall>
+
+<ManualInstall>
+
+<Steps>
+
+<Step>
+
+Install the following dependencies
+
+</Step>
+
+```bash
+npm install colord @radix-ui/react-slot
+```
+
+<Step>
+
+Copy and paste the following code into your project
+
+</Step>
+
+<ComponentSource name="colored-label" />
+
+<Step>
+
+Update the import paths to match your project setup
+
+</Step>
+
+</Steps>
+
+</ManualInstall>
+
+</ComponentInstall>
+
+## Usage
+
+```tsx
+import { ColoredLabel } from "@/components/ui/colored-label"
+```
+
+```tsx
+<ColoredLabel color="#F9A294">Hello</ColoredLabel>
+```
+
+## Examples
+
+### Colors
+
+<ComponentPreview name="colored-label-colors" />
+
+### Opacity
+
+<ComponentPreview name="colored-label-opacity" />
+
+### Dark Mode
+
+<ComponentPreview name="colored-label-dark" />

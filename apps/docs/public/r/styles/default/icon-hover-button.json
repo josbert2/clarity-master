@@ -1,0 +1,18 @@
+{
+  "name": "icon-hover-button",
+  "type": "registry:ui",
+  "dependencies": [
+    "motion"
+  ],
+  "registryDependencies": [
+    "button"
+  ],
+  "files": [
+    {
+      "path": "annui/icon-hover-button.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { AnimatePresence, motion } from \"motion/react\"\n\nimport { cn } from \"@/lib/utils\"\nimport { Button } from \"@/components/ui/button\"\nimport { createContext } from \"@/registry/default/lib/context\"\n\nconst IconHoverButton = React.forwardRef<\n  React.ComponentRef<typeof Button>,\n  React.ComponentPropsWithoutRef<typeof Button>\n>(({ className, children, ...props }, ref) => {\n  const [isHover, setIsHover] = React.useState(false)\n\n  return (\n    <IconHoverButtonProvider value={{ isHover }}>\n      <Button\n        ref={ref}\n        className={cn(\"gap-0 px-2.5 min-w-9\", className)}\n        onMouseEnter={() => setIsHover(true)}\n        onMouseLeave={() => setIsHover(false)}\n        {...props}\n      >\n        {children}\n      </Button>\n    </IconHoverButtonProvider>\n  )\n})\nIconHoverButton.displayName = \"IconHoverButton\"\n\nconst IconHoverButtonIcon = React.forwardRef<\n  React.ComponentRef<\"span\">,\n  React.ComponentPropsWithoutRef<\"span\">\n>(({ className, ...props }, ref) => (\n  <span ref={ref} className={className} {...props} />\n))\nIconHoverButtonIcon.displayName = \"IconHoverButtonIcon\"\n\nconst IconHoverButtonText = React.forwardRef<\n  React.ComponentRef<typeof motion.div>,\n  React.ComponentPropsWithoutRef<typeof motion.div> & {\n    children?: React.ReactNode\n    spanClassName?: string\n  }\n>(({ className, spanClassName, children, ...props }, ref) => {\n  const { isHover } = useIconHoverButtonContext()\n\n  const variants = {\n    initial: {\n      width: 0,\n      opacity: 0,\n    },\n    animate: { width: \"auto\", opacity: 1 },\n  }\n\n  return (\n    <AnimatePresence>\n      {isHover && (\n        <motion.div\n          ref={ref}\n          variants={variants}\n          initial=\"initial\"\n          animate=\"animate\"\n          exit=\"initial\"\n          transition={{ duration: 0.4, type: \"spring\", bounce: 0 }}\n          className={cn(\"overflow-hidden\", className)}\n          {...props}\n        >\n          <span className={cn(\"ml-1\", spanClassName)}>{children}</span>\n        </motion.div>\n      )}\n    </AnimatePresence>\n  )\n})\nIconHoverButtonText.displayName = \"IconHoverButtonText\"\n\ninterface ButtonContextValue {\n  isHover: boolean\n}\n\nconst [IconHoverButtonProvider, useIconHoverButtonContext] =\n  createContext<ButtonContextValue>({\n    isHover: false,\n  })\n\nexport { IconHoverButton, IconHoverButtonIcon, IconHoverButtonText }\nexport { useIconHoverButtonContext }\n",
+      "type": "registry:ui",
+      "target": ""
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+{
+  "name": "dynamic-container",
+  "type": "registry:ui",
+  "dependencies": [
+    "react-use-measure",
+    "@radix-ui/react-slot",
+    "framer-motion"
+  ],
+  "files": [
+    {
+      "path": "annui/dynamic-container.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport { useComposedRefs } from \"@radix-ui/react-compose-refs\"\nimport { Slot } from \"@radix-ui/react-slot\"\nimport { useAnimate } from \"framer-motion\"\nimport useMeasure from \"react-use-measure\"\n\nconst DynamicContainer = React.forwardRef<\n  HTMLDivElement,\n  React.HTMLAttributes<HTMLDivElement> & {\n    asChild?: boolean\n  }\n>(({ children, asChild, ...props }, ref) => {\n  const Comp = asChild ? Slot : \"div\"\n  const [measureRef, { height, width }] = useMeasure()\n  const [scope, animate] = useAnimate()\n\n  React.useEffect(() => {\n    if (scope.current) {\n      animate(scope.current, {\n        height: height > 0 ? height : undefined,\n        width: width > 0 ? width : undefined,\n        transition: { duration: 0.3, type: \"spring\", bounce: 0 },\n      })\n    }\n  }, [height, width])\n\n  const composedRef = useComposedRefs(ref, scope, measureRef)\n\n  return (\n    <Comp\n      data-height={height}\n      data-width={width}\n      ref={composedRef}\n      className=\"overflow-hidden\"\n      style={{ height, width }}\n      {...props}\n    >\n      {children}\n    </Comp>\n  )\n})\n\nexport { DynamicContainer }\n",
+      "type": "registry:ui",
+      "target": ""
+    }
+  ]
+}

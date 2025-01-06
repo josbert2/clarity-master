@@ -1,0 +1,87 @@
+---
+title: Focus Tabs
+description: A keyboard-accessible tab component with customizable triggers and focus states, built on Radix UI Tabs primitive.
+---
+
+<ComponentPreview name="focus-tabs-demo" />
+
+## Installation
+
+<ComponentInstall>
+
+<CLIInstall>
+  
+```bash
+npx shadcn@latest add https://annui.org/r/focus-tabs
+```
+
+</CLIInstall>
+
+<ManualInstall>
+
+<Steps>
+
+<Step>
+
+Install the following dependencies
+
+</Step>
+
+```bash
+npm install @radix-ui/react-tabs @radix-ui/react-use-controllable-state
+```
+
+<Step>
+
+Copy and paste the following code into your project
+
+</Step>
+
+<ComponentSource name="focus-tabs" />
+
+<Step>
+
+Update the import paths to match your project setup
+
+</Step>
+
+</Steps>
+
+</ManualInstall>
+
+</ComponentInstall>
+
+## Usage
+
+```tsx
+import { UserIcon } from "lucide-react"
+
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+  TabsTriggerIcon,
+  TabsTriggerText,
+} from "@/components/ui/focus-tabs"
+```
+
+```tsx
+<Tabs defaultValue="account">
+  <TabsList>
+    <TabsTrigger value="account">
+      <TabsTriggerIcon>
+        <UserIcon />
+      </TabsTriggerIcon>
+      <TabsTriggerText>Account</TabsTriggerText>
+    </TabsTrigger>
+  </TabsList>
+  <TabsContent value="account">This is the account content.</TabsContent>
+</Tabs>
+```
+
+## Examples
+
+### Variant
+
+<ComponentPreview name="focus-tabs-variant" />

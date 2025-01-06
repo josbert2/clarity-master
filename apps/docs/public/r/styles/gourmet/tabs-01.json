@@ -1,0 +1,15 @@
+{
+  "name": "tabs-01",
+  "type": "registry:ui",
+  "dependencies": [
+    "@radix-ui/react-tabs"
+  ],
+  "files": [
+    {
+      "path": "annui/tabs-01.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport * as TabsPrimitive from \"@radix-ui/react-tabs\"\n\nimport { cn } from \"@/lib/utils\"\n\nconst Tabs = TabsPrimitive.Root\n\nconst TabsList = React.forwardRef<\n  React.ComponentRef<typeof TabsPrimitive.List>,\n  React.ComponentPropsWithoutRef<typeof TabsPrimitive.List>\n>(({ children, className, ...props }, ref) => {\n  return (\n    <TabsPrimitive.List\n      ref={ref}\n      className={cn(\"flex flex-col\", className)}\n      {...props}\n    >\n      {children}\n    </TabsPrimitive.List>\n  )\n})\nTabsList.displayName = \"TabsList01\"\n\nconst TabsTrigger = React.forwardRef<\n  React.ComponentRef<typeof TabsPrimitive.Trigger>,\n  React.ComponentPropsWithoutRef<typeof TabsPrimitive.Trigger>\n>(({ className, children, ...props }, ref) => {\n  return (\n    <TabsPrimitive.Trigger\n      ref={ref}\n      className={cn(\n        \"relative group/tabs-trigger py-[.1rem] gap-2 flex items-center justify-start\",\n        className\n      )}\n      {...props}\n    >\n      <span className=\"inline-block h-6 w-1 rounded-full transition-colors bg-muted group-data-[state=active]/tabs-trigger:bg-primary duration-300\" />\n      <div className=\"font-medium text-sm gap-2 inline-flex items-center h-9 text-muted-foreground group-hover/tabs-trigger:brightness-125 group-data-[state=active]/tabs-trigger:text-primary transition-all duration-300\">\n        {children}\n      </div>\n    </TabsPrimitive.Trigger>\n  )\n})\nTabsTrigger.displayName = \"TabsTrigger01\"\n\nconst TabsContent = TabsPrimitive.Content\n\nexport { Tabs, TabsList, TabsTrigger, TabsContent }\n",
+      "type": "registry:ui",
+      "target": ""
+    }
+  ]
+}

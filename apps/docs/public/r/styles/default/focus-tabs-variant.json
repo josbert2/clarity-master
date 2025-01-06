@@ -1,0 +1,15 @@
+{
+  "name": "focus-tabs-variant",
+  "type": "registry:example",
+  "registryDependencies": [
+    "focus-tabs"
+  ],
+  "files": [
+    {
+      "path": "example/focus-tabs-variant.tsx",
+      "content": "\"use client\"\n\nimport { LockIcon, SettingsIcon, UserIcon } from \"lucide-react\"\n\nimport {\n  Tabs,\n  TabsContent,\n  TabsList,\n  TabsTrigger,\n  TabsTriggerIcon,\n  TabsTriggerText,\n} from \"@/registry/default/annui/focus-tabs\"\n\nexport default function FocusTabsVariant() {\n  return (\n    <Tabs defaultValue=\"account\">\n      <TabsList>\n        <VariantTrigger value=\"account\">\n          <TabsTriggerIcon>\n            <UserIcon />\n          </TabsTriggerIcon>\n          <TabsTriggerText>Account</TabsTriggerText>\n        </VariantTrigger>\n        <VariantTrigger value=\"password\">\n          <TabsTriggerIcon>\n            <LockIcon />\n          </TabsTriggerIcon>\n          <TabsTriggerText>Password</TabsTriggerText>\n        </VariantTrigger>\n        <VariantTrigger value=\"settings\">\n          <TabsTriggerIcon>\n            <SettingsIcon />\n          </TabsTriggerIcon>\n          <TabsTriggerText>Settings</TabsTriggerText>\n        </VariantTrigger>\n      </TabsList>\n      <VariantContent value=\"account\">\n        This is the account content.\n      </VariantContent>\n      <VariantContent value=\"password\">\n        This is the password content.\n      </VariantContent>\n      <VariantContent value=\"settings\">\n        This is the settings content.\n      </VariantContent>\n    </Tabs>\n  )\n}\n\nconst VariantTrigger = ({\n  value,\n  children,\n}: {\n  value: string\n  children?: React.ReactNode\n}) => {\n  return (\n    <TabsTrigger\n      className=\"data-[state=active]:bg-primary data-[state=active]:text-primary-foreground\"\n      value={value}\n    >\n      {children}\n    </TabsTrigger>\n  )\n}\n\nconst VariantContent = ({\n  value,\n  children,\n}: {\n  value: string\n  children?: React.ReactNode\n}) => {\n  return (\n    <TabsContent\n      className=\"bg-secondary text-secondary-foreground p-4 rounded-md h-32 w-72\"\n      value={value}\n    >\n      {children}\n    </TabsContent>\n  )\n}\n",
+      "type": "registry:example",
+      "target": ""
+    }
+  ]
+}

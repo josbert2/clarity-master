@@ -1,0 +1,15 @@
+{
+  "name": "icon-hover-button-link",
+  "type": "registry:example",
+  "registryDependencies": [
+    "icon-hover-button"
+  ],
+  "files": [
+    {
+      "path": "example/icon-hover-button-link.tsx",
+      "content": "\"use client\"\n\nimport { PlusIcon } from \"lucide-react\"\n\nimport {\n  IconHoverButton,\n  IconHoverButtonIcon,\n  IconHoverButtonText,\n} from \"@/registry/default/annui/icon-hover-button\"\n\nexport default function IconHoverButtonLink() {\n  return (\n    <IconHoverButton variant=\"link\">\n      <IconHoverButtonIcon>\n        <PlusIcon />\n      </IconHoverButtonIcon>\n      <IconHoverButtonText>Link</IconHoverButtonText>\n    </IconHoverButton>\n  )\n}\n",
+      "type": "registry:example",
+      "target": ""
+    }
+  ]
+}
