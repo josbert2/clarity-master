@@ -1,0 +1,13 @@
+{
+  "name": "Avatar",
+  "type": "registry:ui",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "annui/avatar.tsx",
+      "content": "import * as React from \"react\"\nimport { Slot } from \"@radix-ui/react-slot\"\nimport { colord } from \"colord\"\n\nimport { cn } from \"@/registry/default/lib/utils\"\n\nexport const DataTable = React.forwardRef<\n  React.ComponentRef<\"div\">,\n  React.ComponentPropsWithoutRef<\"div\"> & { asChild?: boolean }\n>(({ children, className, ...props }, ref) => {\n  return (\n    <div\n      ref={ref}\n      className={cn(\"w-full rounded-md border\", className)}\n      {...props}\n    >\n      <Slot className=\"w-full table\">{children}</Slot>\n    </div>\n  )\n})\n",
+      "type": "registry:ui",
+      "target": ""
+    }
+  ]
+}

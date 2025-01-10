@@ -140,4 +140,18 @@ export const ui: Registry = [
       },
     ],
   },
+
+  // New  registry
+
+  {
+    name: "Avatar",
+    type: "registry:ui",
+    dependencies: [],
+    files: [
+      {
+        path: "annui/avatar.tsx",
+        type: "registry:ui",
+      },
+    ],
+  },
 ]

@@ -36,22 +36,25 @@ try {
   if (fs.existsSync(registryFilePath)) {
     fileContent = fs.readFileSync(registryFilePath, "utf-8");
 
-    // Extraer la importación si existe, para no sobrescribirla
-    const importMatch = fileContent.match(/import\s+{[^}]+}\s+from\s+['"].+['"]/);
-    if (importMatch) {
-      importStatement = importMatch[0];
-    }
+    // Debug: Mostrar contenido del archivo
+    console.log("===== Contenido del Archivo =====");
+    console.log(fileContent);
+    console.log("=================================");
+
+    // Extraer todas las importaciones
+    const importMatches = fileContent.match(/import\s+[^;]+;/g);
+    const importStatements = importMatches ? importMatches.join('\n') : importStatement;
 
     // 6) Usar regex para encontrar la parte export const ui: Registry = [ ... ];
-    const uiExportMatch = fileContent.match(/export\s+const\s+ui:\s*Registry\s*=\s*(\[[\s\S]*?\]);/);
+    const uiExportMatch = fileContent.match(/export\s+const\s+ui:\s*Registry\s*=\s*(\[[\s\S]*?\]);?/);
 
     if (uiExportMatch && uiExportMatch[1]) {
       let arrayString = uiExportMatch[1];
 
       try {
-        console.log("===== MATCHED ARRAY STRING =====");
+        console.log("===== STRING DEL ARRAY COINCIDENTE =====");
         console.log(arrayString);
-        console.log("================================");
+        console.log("=======================================");
 
         // 7) Sanitizar: quitar trailing commas, cambiar comillas simples a dobles, etc.
         let sanitizedArrayString = arrayString
@@ -62,17 +65,24 @@ try {
           // Agrega comillas a las keys sin comillas (si tuvieras name: '...')
           .replace(/([{,]\s*)(\w+)\s*:/g, '$1"$2":');
 
-        console.log("===== SANITIZED ARRAY STRING =====");
+        console.log("===== STRING DEL ARRAY SANITIZADO =====");
         console.log(sanitizedArrayString);
-        console.log("==================================");
+        console.log("=======================================");
 
         // 8) Parsear a JSON
         uiArray = JSON.parse(sanitizedArrayString);
-        console.log("uiArray after parse =>", uiArray);
+        console.log("uiArray después de parsear =>", uiArray);
       } catch (parseError) {
-        console.warn("Could not parse existing registry, starting with empty array");
+        console.warn("No se pudo parsear el registry existente, iniciando con un array vacío");
         uiArray = [];
       }
+    } else {
+      console.warn("No se encontró una coincidencia para 'export const ui: Registry = [...]'");
+    }
+
+    // Actualizar la declaración de importación si se extrajeron múltiples
+    if (importMatches && importMatches.length > 0) {
+      importStatement = importMatches.join('\n');
     }
   }
 
@@ -89,7 +99,7 @@ try {
     dependencies: [],
     files: [
       {
-        path: `apps/docs/registry/${name}.tsx`,
+        path: `annui/${name}.tsx`,
         type: "registry:ui",
       },
     ],
@@ -107,7 +117,7 @@ export const ui: Registry = ${JSON.stringify(uiArray, null, 2)};
   // 13) Escribir el archivo de nuevo
   fs.writeFileSync(registryFilePath, updatedContent, "utf-8");
 
-  // 14) Crear el archivo de componente en apps/docs/registry/NombreComponente.tsx
+  // 14) Crear el archivo de componente en apps/docs/registry/default/annui/NombreComponente.tsx
   const componentDir = path.resolve(projectRoot, "apps/docs/registry/default/annui");
   fs.mkdirSync(componentDir, { recursive: true });
 
@@ -136,6 +146,6 @@ export default function ${name}() {
   console.log(`✓ Componente creado en: ${componentPath}`);
 } catch (error) {
   console.error("Error actualizando la registry:", error instanceof Error ? error.message : error);
-  console.error("Full error:", error);
+  console.error("Error completo:", error);
   process.exit(1);
 }

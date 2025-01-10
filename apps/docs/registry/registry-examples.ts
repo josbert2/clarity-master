@@ -309,4 +309,15 @@ export const examples: Registry = [
       },
     ],
   },
+  {
+    name: "avatar-demo",
+    type: "registry:example",
+    registryDependencies: [],
+    files: [
+      {
+        path: "example/avatar-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
 ]

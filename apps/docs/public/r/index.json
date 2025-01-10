@@ -159,5 +159,16 @@
         "type": "registry:ui"
       }
     ]
+  },
+  {
+    "name": "Avatar",
+    "type": "registry:ui",
+    "dependencies": [],
+    "files": [
+      {
+        "path": "annui/avatar.tsx",
+        "type": "registry:ui"
+      }
+    ]
   }
 ]
