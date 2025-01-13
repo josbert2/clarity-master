@@ -320,4 +320,15 @@ export const examples: Registry = [
       },
     ],
   },
+  {
+    name: "button-demo",
+    type: "registry:example",
+    registryDependencies: [],
+    files: [
+      {
+        path: "example/button-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
 ]

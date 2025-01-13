@@ -154,4 +154,16 @@ export const ui: Registry = [
       },
     ],
   },
+
+  {
+    name: "Button",
+    type: "registry:ui",
+    dependencies: [],
+    files: [
+      {
+        path: "annui/button.tsx",
+        type: "registry:ui",
+      },
+    ],
+  },
 ]

@@ -2,12 +2,6 @@
 
 import * as React from "react"
 
-
 export default function AdaptiveContainerDemo() {
-
-  return (
-    <>
-      s
-    </>
-  )
+  return <>s</>
 }

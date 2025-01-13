@@ -10,6 +10,9 @@ import { cn } from "@/registry/default/lib/utils"
 
 import FlyonuiScript from '@/components/FlyonuiScript';
 
+import '../../../packages/clarity/dist/styled.css'
+
+
 export const metadata: Metadata = {
   title: {
     default: "AnnUI - Modern React Component Library",
@@ -65,13 +68,7 @@ export default function Layout({ children }: { children: ReactNode }) {
       suppressHydrationWarning
     >
       <body className="flex flex-col min-h-svh font-sans antialiased">
-      <button
-        className="inline-block cursor-pointer rounded-md bg-blue-500 px-4 py-3 text-center text-sm font-semibold uppercase text-white transition duration-200 ease-in-out hover:bg-blue-600"
-      >
-        Button
-      </button> 
         <RootProvider>{children}</RootProvider>
-        
         <Toaster />
       </body>
       <FlyonuiScript />
