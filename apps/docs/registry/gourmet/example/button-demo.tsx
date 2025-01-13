@@ -1,5 +1,9 @@
 import React from "react"
 
 export default function buttonDemo() {
-  return <div>button-demo</div>
+  return (
+    <>
+      <button className="btn btn-fresh">Default</button>
+    </>
+  )
 }

@@ -4,6 +4,7 @@
   "pages": [
     "---Getting Started---",
     "index",
+    "generate",
     "installation",
     "---Components---",
     "...components"
