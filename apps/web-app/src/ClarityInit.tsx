@@ -16,10 +16,8 @@ export default function FlyonuiScript() {
   useEffect(() => {
     const loadFlyonui = async () => {
       await import('clarity/flyonui');
-
       window.HSStaticMethods.autoInit();
     };
-
     loadFlyonui();
   }, [path]);
 

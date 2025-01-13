@@ -9,8 +9,7 @@
     "allowJs": true,
     "moduleResolution": "node",
     "esModuleInterop": true,
-    "allowSyntheticDefaultImports": true,
-    "types": ["clipboard"]
+    "allowSyntheticDefaultImports": true
   },
   "include": ["src/js/**/*", "./global.d.ts"],
   "exclude": ["node_modules", "**/*.spec.ts"]

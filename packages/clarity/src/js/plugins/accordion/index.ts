@@ -30,7 +30,7 @@ class HSAccordion extends HSBasePlugin<IAccordionOptions> implements IAccordion 
     this.toggle = this.el.querySelector('.accordion-toggle') || null
     this.content = this.el.querySelector('.accordion-content') || null
     this.update()
-    console.log('test bun')
+
     if (this.toggle) {
       this.isToggleStopPropagated = stringToBoolean(
         getClassProperty(this.toggle, '--stop-propagation', 'false') || 'false'

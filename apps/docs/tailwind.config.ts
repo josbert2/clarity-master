@@ -11,10 +11,13 @@ const config: Config = {
     "./mdx-components.{ts,tsx}",
     "./node_modules/fumadocs-ui/dist/**/*.js",
     "./registry/**/*.{ts,tsx}",
+    './node_modules/clarity/flyonui.js',
   ],
   presets: [createPreset()],
   plugins: [
-    require("tailwindcss-animate")
+    require("tailwindcss-animate"),
+    require('clarity'), 
+    require('clarity/plugin')
    
   ],
   theme: {
