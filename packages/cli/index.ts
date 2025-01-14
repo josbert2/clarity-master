@@ -65,20 +65,20 @@ let fileContent = "";
 let registryArray: any[] = [];
 let importStatement = `import { Registry } from "@/registry/schema";`;
 
-// 6) Leer y parsear el archivo actual, si existe
+// 6) Leer el archivo actual si existe
 if (fs.existsSync(registryFilePath)) {
   fileContent = fs.readFileSync(registryFilePath, "utf-8");
 
-  // Extraer todas las importaciones
+  // Extraer todas las importaciones (para usarlas más adelante si quieres)
   const importMatches = fileContent.match(/import\s+[^;]+;/g);
   if (importMatches && importMatches.length > 0) {
     importStatement = importMatches.join("\n");
   }
 
-  // Extraer el array exportado, p. ej. export const ui: Registry = [ ... ];
-  // o export const examples: Registry = [ ... ];
+  // Extraer el array exportado, p. ej.
+  // export const ui: Registry = [ ... ];
   const exportRegex = new RegExp(
-    `export\\s+const\\s+${registryInfo.exportName}:\\s*Registry\\s*=\\s*(\\[[\\s\\S]*?\\]);?`
+    `export\\s+const\\s+${registryInfo.exportName}:\\s*Registry\\s*=\\s*(\\[[\\s\\S]*?\\])`
   );
   const exportMatch = fileContent.match(exportRegex);
 
@@ -102,7 +102,7 @@ if (fs.existsSync(registryFilePath)) {
     }
   } else {
     console.warn(
-      `No se encontró un export const ${registryInfo.exportName}: Registry = [...] en ${registryInfo.fileName}`
+      `No se encontró un 'export const ${registryInfo.exportName}: Registry = [...]' válido en ${registryInfo.fileName}`
     );
   }
 }
@@ -114,31 +114,6 @@ if (registryArray.some((item) => item.name === componentName)) {
 }
 
 // 8) Construir el nuevo item
-//
-// Para "ui", es algo como:
-// {
-//   "name": "focus-tabs",
-//   "type": "registry:ui",
-//   "dependencies": [ ... ],
-//   "files": [
-//     { "path": "annui/focus-tabs.tsx", "type": "registry:ui" }
-//   ]
-// }
-// 
-// Para "example", algo como:
-// {
-//   "name": "focus-tabs-demo",
-//   "type": "registry:example",
-//   "registryDependencies": [...],
-//   "files": [
-//     { "path": "example/focus-tabs-demo.tsx", "type": "registry:example" }
-//   ]
-// }
-// 
-// Ajusta según tu necesidad. Aquí un ejemplo genérico:
-// (Si quieres que los 'dependencies' o 'registryDependencies' sean dinámicos, 
-//  agrégalo a tu gusto.)
-//
 const newItem: Record<string, any> = {
   name: componentName,
   type: registryInfo.itemType,
@@ -158,27 +133,51 @@ if (typeValue === "example") {
 // 9) Agregarlo al arreglo
 registryArray.push(newItem);
 
-// 10) Reconstruir el contenido del archivo
-const updatedContent = `
+//
+// 10) Convertir a JSON y reemplazar SOLO la parte de [ ... ] dentro del export const ui = ...
+//
+const newArrayString = JSON.stringify(registryArray, null, 2);
+
+/**
+ * Regex de reemplazo:
+ * - Capturamos "export const ui: Registry ="
+ * - Capturamos el contenido "[ ... ]"
+ * - Capturamos un ";" opcional al final
+ *
+ * Usamos un replace que reemplace SOLO el segundo grupo con newArrayString.
+ *
+ * Así no perdemos nada del archivo (importaciones, etc.), 
+ * y mantenemos intacto lo que esté antes/después.
+ */
+const arrayReplaceRegex = new RegExp(
+  `(export\\s+const\\s+${registryInfo.exportName}:\\s*Registry\\s*=\\s*)(\\[[\\s\\S]*?\\])(;?)`
+);
+
+if (arrayReplaceRegex.test(fileContent)) {
+  fileContent = fileContent.replace(
+    arrayReplaceRegex,
+    `$1${newArrayString}$3`
+  );
+} else {
+  // Si no se halló la sección para reemplazar, quizás no existía. 
+  // De ser el caso, podrías:
+  // - Insertar al final, 
+  // - O lanzar error,
+  // según tu preferencia.
+  console.warn(`No se pudo reemplazar el array. Se agregará uno al final del archivo.`);
+  fileContent += `
+
 ${importStatement}
 
-export const ${registryInfo.exportName}: Registry = ${JSON.stringify(
-  registryArray,
-  null,
-  2
-)};
+export const ${registryInfo.exportName}: Registry = ${newArrayString};
 `;
+}
 
-// 11) Escribir de nuevo el archivo
-fs.writeFileSync(registryFilePath, updatedContent, "utf-8");
+// 11) Guardar el archivo con el contenido modificado
+fs.writeFileSync(registryFilePath, fileContent, "utf-8");
 
 // 12) Crear el/los archivos de componente en las rutas indicadas para cada tema
-//
-// En tu ejemplo, para UI: apps/docs/registry/<THEME>/annui/<componente>.tsx
-// Para example: apps/docs/registry/<THEME>/example/<componente>.tsx
-//
 THEMES.forEach((theme) => {
-  // Directorio: apps/docs/registry/<theme>/<folderName>
   const themeDir = path.resolve(
     projectRoot,
     "apps/docs/registry",
