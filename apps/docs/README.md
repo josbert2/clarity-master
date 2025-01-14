@@ -105,3 +105,5 @@ Editar el contenido, asinar el nombre del demo creado
   description="A component that allows you to create an adaptive container."
 />
 ```
+
+./registry.sh --component=MyTest --type=example --theme=gourmet
