@@ -2,150 +2,213 @@
 import fs from "fs";
 import path from "path";
 
-// 1) Determinar la ruta raíz (sube 2 niveles desde packages/cli)
+// Temas que quieres crear
+const THEMES = ["default", "gourmet"];
+
+// Mapea el tipo con el nombre de la exportación y el nombre de archivo
+const REGISTRY_CONFIG = {
+  ui: {
+    exportName: "ui",
+    fileName: "registry-ui.tsx", // Ajusta si tu archivo se llama diferente
+    itemType: "registry:ui",
+    folderName: "annui", // subcarpeta donde crear componentes UI
+  },
+  example: {
+    exportName: "examples",
+    fileName: "registry-example.tsx", // Ajusta si tu archivo se llama diferente
+    itemType: "registry:example",
+    folderName: "example", // subcarpeta donde crear componentes de ejemplos
+  },
+};
+
+// 1) Determinar la ruta raíz de tu proyecto
 const projectRoot = path.resolve(__dirname, "../..");
 
-// 2) Ubicar el archivo registry-ui.ts dentro de apps/docs/registry
-const registryFilePath = path.resolve(projectRoot, "apps/docs/registry/registry-ui.ts");
+//
+// 2) Parsear argumentos
+//
+const [, , ...args] = process.argv;
+const componentArg = args.find((arg) => arg.startsWith("--component="));
+const typeArg = args.find((arg) => arg.startsWith("--type="));
 
-// 3) Leer el argumento --name=TuComponente
-const [, , nameArg] = process.argv;
-const name = nameArg?.replace(/^--name=/, "");
+// Extraemos valores
+const componentName = componentArg?.replace("--component=", "");
+const typeValue = typeArg?.replace("--type=", "") as keyof typeof REGISTRY_CONFIG;
 
-// 4) Validar que venga el nombre
-if (!name) {
-  console.error("Uso: bun index.ts --name=MiComponente");
+// 3) Validaciones de argumentos
+if (!componentName || !typeValue) {
+  console.error("Uso: bun index.ts --component=MiComponente --type=ui|example");
   process.exit(1);
 }
 
-// Info para debug
-console.log("Registry File Path:", registryFilePath);
-console.log("Project Root:", projectRoot);
+// Verificamos que el tipo sea válido
+if (!(typeValue in REGISTRY_CONFIG)) {
+  console.error(`El tipo '${typeValue}' no es válido. Debe ser 'ui' o 'example'.`);
+  process.exit(1);
+}
 
-try {
-  // Asegurarnos de que exista la carpeta que contiene registry-ui.ts
-  fs.mkdirSync(path.dirname(registryFilePath), { recursive: true });
+//
+// 4) Determinar ruta del archivo de registro según el tipo
+//
+const registryInfo = REGISTRY_CONFIG[typeValue];
+const registryFilePath = path.resolve(
+  projectRoot,
+  "apps/docs/registry",
+  registryInfo.fileName
+);
 
-  let fileContent = "";
-  let uiArray: any[] = [];
+// 5) Crear la carpeta si no existe
+fs.mkdirSync(path.dirname(registryFilePath), { recursive: true });
 
-  // Valor por defecto de la importación
-  let importStatement = `import { Registry } from "@/registry/schema";`;
+// Variables para acumular el contenido existente
+let fileContent = "";
+let registryArray: any[] = [];
+let importStatement = `import { Registry } from "@/registry/schema";`;
 
-  // 5) Verificar si ya existe un registry-ui.ts
-  if (fs.existsSync(registryFilePath)) {
-    fileContent = fs.readFileSync(registryFilePath, "utf-8");
+// 6) Leer y parsear el archivo actual, si existe
+if (fs.existsSync(registryFilePath)) {
+  fileContent = fs.readFileSync(registryFilePath, "utf-8");
 
-    // Debug: Mostrar contenido del archivo
-    console.log("===== Contenido del Archivo =====");
-    console.log(fileContent);
-    console.log("=================================");
-
-    // Extraer todas las importaciones
-    const importMatches = fileContent.match(/import\s+[^;]+;/g);
-    const importStatements = importMatches ? importMatches.join('\n') : importStatement;
-
-    // 6) Usar regex para encontrar la parte export const ui: Registry = [ ... ];
-    const uiExportMatch = fileContent.match(/export\s+const\s+ui:\s*Registry\s*=\s*(\[[\s\S]*?\]);?/);
-
-    if (uiExportMatch && uiExportMatch[1]) {
-      let arrayString = uiExportMatch[1];
-
-      try {
-        console.log("===== STRING DEL ARRAY COINCIDENTE =====");
-        console.log(arrayString);
-        console.log("=======================================");
-
-        // 7) Sanitizar: quitar trailing commas, cambiar comillas simples a dobles, etc.
-        let sanitizedArrayString = arrayString
-          // Elimina comas sobrantes antes de } o ]:  ,]
-          .replace(/,\s*([\]}])/g, "$1")
-          // Cambia comillas simples a dobles
-          .replace(/'/g, '"')
-          // Agrega comillas a las keys sin comillas (si tuvieras name: '...')
-          .replace(/([{,]\s*)(\w+)\s*:/g, '$1"$2":');
-
-        console.log("===== STRING DEL ARRAY SANITIZADO =====");
-        console.log(sanitizedArrayString);
-        console.log("=======================================");
-
-        // 8) Parsear a JSON
-        uiArray = JSON.parse(sanitizedArrayString);
-        console.log("uiArray después de parsear =>", uiArray);
-      } catch (parseError) {
-        console.warn("No se pudo parsear el registry existente, iniciando con un array vacío");
-        uiArray = [];
-      }
-    } else {
-      console.warn("No se encontró una coincidencia para 'export const ui: Registry = [...]'");
-    }
-
-    // Actualizar la declaración de importación si se extrajeron múltiples
-    if (importMatches && importMatches.length > 0) {
-      importStatement = importMatches.join('\n');
-    }
+  // Extraer todas las importaciones
+  const importMatches = fileContent.match(/import\s+[^;]+;/g);
+  if (importMatches && importMatches.length > 0) {
+    importStatement = importMatches.join("\n");
   }
 
-  // 9) Checar si ya existe un item con ese nombre
-  if (uiArray.some((item) => item.name === name)) {
-    console.error(`El item '${name}' ya existe en la registry.`);
-    process.exit(1);
+  // Extraer el array exportado, p. ej. export const ui: Registry = [ ... ];
+  // o export const examples: Registry = [ ... ];
+  const exportRegex = new RegExp(
+    `export\\s+const\\s+${registryInfo.exportName}:\\s*Registry\\s*=\\s*(\\[[\\s\\S]*?\\]);?`
+  );
+  const exportMatch = fileContent.match(exportRegex);
+
+  if (exportMatch && exportMatch[1]) {
+    let arrayString = exportMatch[1];
+
+    try {
+      // Sanitiza
+      let sanitizedArrayString = arrayString
+        .replace(/,\s*([\]}])/g, "$1") // quita comas sobrantes
+        .replace(/'/g, '"') // comillas simples -> dobles
+        .replace(/([{,]\s*)(\w+)\s*:/g, '$1"$2":'); // keys sin comillas -> comillas
+
+      // Parsear
+      registryArray = JSON.parse(sanitizedArrayString);
+    } catch (err) {
+      console.warn(
+        "No se pudo parsear el contenido existente, iniciando con un array vacío."
+      );
+      registryArray = [];
+    }
+  } else {
+    console.warn(
+      `No se encontró un export const ${registryInfo.exportName}: Registry = [...] en ${registryInfo.fileName}`
+    );
   }
+}
 
-  // 10) Crear nuevo item
-  const newItem = {
-    name,
-    type: "registry:ui",
-    dependencies: [],
-    files: [
-      {
-        path: `annui/${name}.tsx`,
-        type: "registry:ui",
-      },
-    ],
-  };
+// 7) Revisar si ya existe un item con ese nombre
+if (registryArray.some((item) => item.name === componentName)) {
+  console.error(`El item '${componentName}' ya existe en el ${registryInfo.fileName}.`);
+  process.exit(1);
+}
 
-  // 11) Insertarlo al array
-  uiArray.push(newItem);
+// 8) Construir el nuevo item
+//
+// Para "ui", es algo como:
+// {
+//   "name": "focus-tabs",
+//   "type": "registry:ui",
+//   "dependencies": [ ... ],
+//   "files": [
+//     { "path": "annui/focus-tabs.tsx", "type": "registry:ui" }
+//   ]
+// }
+// 
+// Para "example", algo como:
+// {
+//   "name": "focus-tabs-demo",
+//   "type": "registry:example",
+//   "registryDependencies": [...],
+//   "files": [
+//     { "path": "example/focus-tabs-demo.tsx", "type": "registry:example" }
+//   ]
+// }
+// 
+// Ajusta según tu necesidad. Aquí un ejemplo genérico:
+// (Si quieres que los 'dependencies' o 'registryDependencies' sean dinámicos, 
+//  agrégalo a tu gusto.)
+//
+const newItem: Record<string, any> = {
+  name: componentName,
+  type: registryInfo.itemType,
+  files: [
+    {
+      path: `${registryInfo.folderName}/${componentName}.tsx`,
+      type: registryInfo.itemType,
+    },
+  ],
+};
 
-  // 12) Reconstruir el contenido de registry-ui.ts
-  const updatedContent = `${importStatement}
+// Si es example, puede que quieras un campo "registryDependencies"
+if (typeValue === "example") {
+  newItem.registryDependencies = [];
+}
 
-export const ui: Registry = ${JSON.stringify(uiArray, null, 2)};
+// 9) Agregarlo al arreglo
+registryArray.push(newItem);
+
+// 10) Reconstruir el contenido del archivo
+const updatedContent = `
+${importStatement}
+
+export const ${registryInfo.exportName}: Registry = ${JSON.stringify(
+  registryArray,
+  null,
+  2
+)};
 `;
 
-  // 13) Escribir el archivo de nuevo
-  fs.writeFileSync(registryFilePath, updatedContent, "utf-8");
+// 11) Escribir de nuevo el archivo
+fs.writeFileSync(registryFilePath, updatedContent, "utf-8");
 
-  // 14) Crear el archivo de componente en apps/docs/registry/default/annui/NombreComponente.tsx
-  const componentDir = path.resolve(projectRoot, "apps/docs/registry/default/annui");
-  fs.mkdirSync(componentDir, { recursive: true });
+// 12) Crear el/los archivos de componente en las rutas indicadas para cada tema
+//
+// En tu ejemplo, para UI: apps/docs/registry/<THEME>/annui/<componente>.tsx
+// Para example: apps/docs/registry/<THEME>/example/<componente>.tsx
+//
+THEMES.forEach((theme) => {
+  // Directorio: apps/docs/registry/<theme>/<folderName>
+  const themeDir = path.resolve(
+    projectRoot,
+    "apps/docs/registry",
+    theme,
+    registryInfo.folderName
+  );
+  fs.mkdirSync(themeDir, { recursive: true });
 
-  const componentPath = path.resolve(componentDir, `${name}.tsx`);
+  const componentPath = path.resolve(themeDir, `${componentName}.tsx`);
 
   if (!fs.existsSync(componentPath)) {
     fs.writeFileSync(
       componentPath,
-      `
-import React from 'react';
+      `import React from "react";
 
-export default function ${name}() {
+export default function ${componentName}() {
   return (
     <div>
-      {/* ${name} Component */}
-      Hello, ${name}!
+      {/* ${componentName} Component */}
+      Hello, ${componentName}!
     </div>
   );
 }
-`.trim(),
+`,
       "utf-8"
     );
+    console.log(`✓ Componente creado en: ${componentPath}`);
+  } else {
+    console.warn(`El archivo ya existe y no se sobreescribió: ${componentPath}`);
   }
+});
 
-  console.log(`✓ Se añadió '${name}' al archivo registry-ui.ts correctamente.`);
-  console.log(`✓ Componente creado en: ${componentPath}`);
-} catch (error) {
-  console.error("Error actualizando la registry:", error instanceof Error ? error.message : error);
-  console.error("Error completo:", error);
-  process.exit(1);
-}
+console.log(`✓ Se añadió '${componentName}' al archivo ${registryInfo.fileName} correctamente.`);
