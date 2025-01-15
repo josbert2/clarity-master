@@ -213,6 +213,22 @@ export const Index: Record<string, any> = {
       subcategory: "",
       chunks: []
     },
+    "button-variants-demo": {
+      name: "button-variants-demo",
+      description: "",
+      type: "registry:example",
+      registryDependencies: undefined,
+      files: [{
+        path: "registry/default/example/button-variants-demo.tsx",
+        type: "registry:example",
+        target: ""
+      }],
+      component: React.lazy(() => import("@/registry/default/example/button-variants-demo.tsx")),
+      source: "",
+      category: "",
+      subcategory: "",
+      chunks: []
+    },
     "focus-tabs-demo": {
       name: "focus-tabs-demo",
       description: "",
@@ -929,6 +945,22 @@ export const Index: Record<string, any> = {
         target: ""
       }],
       component: React.lazy(() => import("@/registry/gourmet/annui/button.tsx")),
+      source: "",
+      category: "",
+      subcategory: "",
+      chunks: []
+    },
+    "button-variants-demo": {
+      name: "button-variants-demo",
+      description: "",
+      type: "registry:example",
+      registryDependencies: undefined,
+      files: [{
+        path: "registry/gourmet/example/button-variants-demo.tsx",
+        type: "registry:example",
+        target: ""
+      }],
+      component: React.lazy(() => import("@/registry/gourmet/example/button-variants-demo.tsx")),
       source: "",
       category: "",
       subcategory: "",

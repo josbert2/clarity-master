@@ -37,12 +37,14 @@ export function ComponentPreview({
 }: ComponentPreviewProps) {
   const index = styles.findIndex((style) => style.name === "default")
 
+
+
   const Codes = React.Children.toArray(children) as React.ReactElement[]
   const Code = Codes[index]
 
   const Preview = React.useMemo(() => {
     const Component = Index["default"][name]?.component
-   
+    
     if (!Component) {
       return (
         <p className="text-sm text-muted-foreground">

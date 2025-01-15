@@ -2,6 +2,19 @@ import { Registry } from "@/registry/schema"
 
 export const examples: Registry = [
   {
+    name: "button-variants-demo",
+    type: "registry:example",
+    dependencies: [],
+    files: [
+      {
+        path: "example/button-variants-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+
+
+  {
     name: "focus-tabs-demo",
     type: "registry:example",
     registryDependencies: ["focus-tabs"],

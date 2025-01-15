@@ -2,6 +2,18 @@ import { Registry } from "@/registry/schema"
 
 export const ui: Registry = [
   {
+    name: "button-variants-demo",
+    type: "registry:ui",
+    dependencies: [],
+    files: [
+      {
+        path: "annui/button-variants-demo.tsx",
+        type: "registry:ui",
+      },
+    ],
+  },
+
+  {
     name: "focus-tabs",
     type: "registry:ui",
     dependencies: [

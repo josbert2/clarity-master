@@ -1,11 +1,64 @@
 #!/usr/bin/env bash
 
+
+# Códigos de color ANSI
+RED="\033[31m"
+GREEN="\033[32m"
+YELLOW="\033[33m"
+BLUE="\033[34m"
+MAGENTA="\033[35m"
+CYAN="\033[36m"
+WHITE="\033[37m"
+RESET="\033[0m"  # Quita los atributos (vuelve a "normal")
+
+
+function success_msg() {
+  echo -e "${GREEN}✅ $1${RESET}"
+}
+
+# Función para mostrar un mensaje de error
+function error_msg() {
+  echo -e "${RED}❌ $1${RESET}"
+}
+
+# Función para mostrar una advertencia
+function warn_msg() {
+  echo -e "${YELLOW}⚠️  $1${RESET}"
+}
+
 # registry.sh
 # Ejemplo de uso:
-#   ./registry.sh --component=Test --type=ui --theme=default
-#   ./registry.sh --component=Card --type=example --theme=gourmet
+#   ./registry.sh --component=Test
+#     -> Creará/insertará para (type=ui, theme=default), (type=ui, theme=gourmet),
+#        (type=example, theme=default), (type=example, theme=gourmet)
+#
+#   ./registry.sh --component=Card --type=example
+#     -> Creará/insertará para (type=example, theme=default) y (type=example, theme=gourmet)
+#
+#   ./registry.sh --component=Button --theme=default
+#     -> Creará/insertará para (type=ui, theme=default) y (type=example, theme=default)
+#
+#   ./registry.sh --component=Avatar --type=ui --theme=gourmet
+#     -> Creará/insertará SOLO (type=ui, theme=gourmet)
 
-# --- 1) Parsear argumentos ---
+########################################
+# 1) Función para convertir a PascalCase
+########################################
+to_pascal_case() {
+  local str="$1"
+  # Reemplaza '-' con espacio
+  str="${str//-/ }"
+  local pascal=""
+  # Capitaliza cada palabra y concatena
+  for w in $str; do
+    pascal="${pascal}${w^}"
+  done
+  echo "$pascal"
+}
+
+########################################
+# 2) Parsear argumentos
+########################################
 for arg in "$@"; do
   case $arg in
     --component=*)
@@ -26,119 +79,157 @@ for arg in "$@"; do
   esac
 done
 
-# --- 2) Validar argumentos ---
+# Validar que tengamos componente
 if [ -z "$COMPONENT_NAME" ]; then
   echo "Error: Debes especificar un nombre de componente con --component=Nombre"
   exit 1
 fi
 
-# Si no se pasa --type, por defecto será "ui"
+########################################
+# 3) Arrays de valores válidos para type y theme
+########################################
+VALID_TYPES=("ui" "example")
+VALID_THEMES=("default" "gourmet")
+
+# Si no se pasa --type, usaremos TODOS los valid types
 if [ -z "$COMPONENT_TYPE" ]; then
-  COMPONENT_TYPE="ui"
+  USE_TYPES=("${VALID_TYPES[@]}")
+else
+  # Validar que el type pasado sea uno de los permitidos
+  if [[ ! " ${VALID_TYPES[*]} " =~ " $COMPONENT_TYPE " ]]; then
+    echo "Error: --type debe ser uno de: ${VALID_TYPES[*]}"
+    exit 1
+  fi
+  USE_TYPES=("$COMPONENT_TYPE")
 fi
 
-# Validar que type sea 'ui' o 'example'
-if [ "$COMPONENT_TYPE" != "ui" ] && [ "$COMPONENT_TYPE" != "example" ]; then
-  echo "Error: --type debe ser 'ui' o 'example'"
-  exit 1
-fi
-
-# Si no se pasa --theme, por defecto será "default"
+# Si no se pasa --theme, usaremos TODOS los valid themes
 if [ -z "$THEME" ]; then
-  THEME="default"
-fi
-
-# Validar que theme sea 'default' o 'gourmet'
-if [ "$THEME" != "default" ] && [ "$THEME" != "gourmet" ]; then
-  echo "Error: --theme debe ser 'default' o 'gourmet'"
-  exit 1
-fi
-
-# --- 3) Definir archivo de registro y nombre de array según el tipo ---
-if [ "$COMPONENT_TYPE" == "ui" ]; then
-  REGISTRY_FILE="registry-ui.tsx"  # Ajusta si tu archivo se llama distinto
-  ARRAY_NAME="ui"                  # Ajusta si el array no se llama 'ui'
+  USE_THEMES=("${VALID_THEMES[@]}")
 else
-  # type=example
-  REGISTRY_FILE="registry-examples.ts"  # Ajusta si tu archivo se llama distinto
-  ARRAY_NAME="examples"                 # Ajusta si el array no se llama 'examples'
+  # Validar que el theme pasado sea uno de los permitidos
+  if [[ ! " ${VALID_THEMES[*]} " =~ " $THEME " ]]; then
+    echo "Error: --theme debe ser uno de: ${VALID_THEMES[*]}"
+    exit 1
+  fi
+  USE_THEMES=("$THEME")
 fi
 
-# --- 4) Definir la ruta base según el theme ---
-PATH_PREFIX="registry/${THEME}"
-
-# --- 5) Definir la carpeta final según el tipo ---
-if [ "$COMPONENT_TYPE" == "ui" ]; then
-  PATH_SUFFIX="annui"
-else
-  PATH_SUFFIX="example"
-fi
-
-# --- 6) Construir ruta final donde estará el archivo TSX ---
-FILE_PATH="${PATH_PREFIX}/${PATH_SUFFIX}/${COMPONENT_NAME}.tsx"
-echo "FILE_PATH: ${FILE_PATH}"
-
-# --- 7) Crear la carpeta y el archivo (si no existe) ---
-mkdir -p "$(dirname "$FILE_PATH")"
-if [ ! -f "$FILE_PATH" ]; then
-  # OPCIONAL: contenido base
-  echo "export default function ${COMPONENT_NAME}() {
-  return (
-    <div>
-      <h1>${COMPONENT_NAME} component</h1>
-    </div>
-  )
-}
-" > "$FILE_PATH"
-else
-  echo "El archivo '${FILE_PATH}' ya existe. Se conservará el contenido actual."
-fi
-
-# --- 8) Verificar si ya existe el componente en el registro para evitar duplicados ---
-if grep -q "name: \"${COMPONENT_NAME}\"" "$REGISTRY_FILE"; then
-  echo "⚠️  El componente '${COMPONENT_NAME}' ya existe en ${REGISTRY_FILE}."
-  echo "    No se insertará un duplicado."
-  exit 1
-fi
-
-# --- 9) Insertar el objeto en el archivo de registro (via sed) ---
-sed -i "/^export const ${ARRAY_NAME}: Registry = \[/a \  {\n    name: \"${COMPONENT_NAME}\",\n    type: \"registry:${COMPONENT_TYPE}\",\n    dependencies: [],\n    files: [\n      {\n        path: \"${FILE_PATH}\",\n        type: \"registry:${COMPONENT_TYPE}\",\n      },\n    ],\n  }," ./$REGISTRY_FILE
-
-# --- 10) Mensaje de confirmación ---
-echo "-----------------------------------------------"
-echo "✅ Se ha añadido el componente '${COMPONENT_NAME}'"
-echo "   - Type: ${COMPONENT_TYPE}"
-echo "   - Theme: ${THEME}"
-echo "   - Registro modificado: ${REGISTRY_FILE}"
-echo "   - Ruta generada: ${FILE_PATH}"
-echo "-----------------------------------------------"
-
-# --- 11) Registrar en el historial (registry-history.json) ---
+########################################
+# 4) Definir archivo JSON de historial
+########################################
 HISTORY_FILE="registry-history.json"
-
-# 1) Verificar si existe el archivo JSON; si no, crearlo con array vacío
 if [ ! -f "$HISTORY_FILE" ]; then
   echo "[]" > "$HISTORY_FILE"
 fi
 
-# 2) Usar jq para agregar un nuevo objeto al array existente
-#    - 'now' en jq genera un timestamp UNIX, si quieres un string con fecha legible, puedes usar algo como:
-#      date +"%Y-%m-%d %H:%M:%S"
-#
-#   Comando jq explicado:
-#     - . es el array actual
-#     - + [{ ... }] añade un nuevo objeto al final
-#     - --arg var "" para inyectar variables shell en el contexto de jq
-#     - .timestamp = (now | todate) => convierte el UNIX timestamp en un string con formato ISO 8601
-#        (disponible desde jq 1.6). Si tu jq es más viejo, puedes usar date en bash y pasarla como variable.
+# Generar el nombre en PascalCase (para la función dentro del .tsx)
+pascalName=$(to_pascal_case "$COMPONENT_NAME")
 
-jq --arg component "$COMPONENT_NAME" \
-   --arg ctype "$COMPONENT_TYPE" \
-   --arg ctheme "$THEME" \
-   '. + [{ component: $component, type: $ctype, theme: $ctheme, timestamp: (now | todate) }]' \
-   "$HISTORY_FILE" > temp_history.json && mv temp_history.json "$HISTORY_FILE"
+########################################
+# 5) Función para procesar UNA combinación (type, theme)
+########################################
+function process_combination() {
+  local compName="$1"
+  local t="$2"
+  local th="$3"
 
-echo "Registro agregado a $HISTORY_FILE:"
-echo "  - Component: $COMPONENT_NAME"
-echo "  - Type: $COMPONENT_TYPE"
-echo "  - Theme: $THEME"
+  # 1) Definir archivo de registro y nombre del array
+  local REGISTRY_FILE ARRAY_NAME
+  if [ "$t" == "ui" ]; then
+    REGISTRY_FILE="registry-ui.ts"
+    ARRAY_NAME="ui"
+  else
+    # t == "example"
+    REGISTRY_FILE="registry-examples.ts"
+    ARRAY_NAME="examples"
+  fi
+
+  # 2) Definir ruta real y ruta que se coloca en el registro
+  local PATH_PREFIX="registry/${th}"
+  local PATH_SUFFIX
+  if [ "$t" == "ui" ]; then
+    PATH_SUFFIX="annui"
+  else
+    PATH_SUFFIX="example"
+  fi
+
+  # FILE_PATH se guardará en "files: []"
+  local FILE_PATH="${PATH_SUFFIX}/${compName}.tsx"
+  # FILE_PATH_REAL es la ruta física real en el proyecto
+  local FILE_PATH_REAL="${PATH_PREFIX}/${FILE_PATH}"
+
+  echo "===================================="
+  echo "👉 Procesando: component=$compName, type=$t, theme=$th"
+  echo "   - Registry file: $REGISTRY_FILE"
+  echo "   - Ruta relativa (en 'files'): $FILE_PATH"
+  echo "   - Ruta física real: $FILE_PATH_REAL"
+
+  # 3) Crear carpeta y archivo (si no existe)
+  mkdir -p "$(dirname "$FILE_PATH_REAL")"
+
+  if [ -f "$FILE_PATH_REAL" ]; then
+    echo "   [INFO] El archivo '${FILE_PATH_REAL}' ya existe. No se sobreescribe."
+  else
+    echo "   [INFO] Creando archivo '${FILE_PATH_REAL}'"
+    cat <<EOF > "$FILE_PATH_REAL"
+export default function ${pascalName}() {
+  return (
+    <div>
+      <h1>${compName} component</h1>
+    </div>
+  )
+}
+EOF
+  fi
+
+  # 4) Verificar si el archivo de registro (p.ej. registry-ui.ts) existe
+  #    si no, crearlo con la estructura base
+  if [ ! -f "registry/$REGISTRY_FILE" ]; then
+    echo "   [WARN] El archivo 'registry/$REGISTRY_FILE' no existe. Creando archivo base..."
+    mkdir -p registry
+    cat <<EOF > "registry/$REGISTRY_FILE"
+import { Registry } from "@/registry/schema"
+
+export const ${ARRAY_NAME}: Registry = []
+EOF
+  fi
+
+  # 5) Verificar si ya existe en el registro => grep "name: \"${compName}\""
+  if grep -q "name: \"${compName}\"" "registry/$REGISTRY_FILE"; then
+    echo "   [WARN] El componente '${compName}' ya existe en 'registry/$REGISTRY_FILE'."
+    echo "          No se insertará un duplicado."
+    return
+  fi
+
+  # 6) Insertar en el registro si no está
+  echo "   [INFO] Insertando en 'registry/$REGISTRY_FILE'..."
+  sed -i "/^export const ${ARRAY_NAME}: Registry = \[/a \  {\n    name: \"${compName}\",\n    type: \"registry:${t}\",\n    dependencies: [],\n    files: [\n      {\n        path: \"${FILE_PATH}\",\n        type: \"registry:${t}\",\n      },\n    ],\n  }," "registry/$REGISTRY_FILE"
+
+  # 7) Añadir al historial JSON con jq
+  echo "   [INFO] Actualizando historial en $HISTORY_FILE..."
+  local TIMESTAMP
+  TIMESTAMP=$(date +"%Y-%m-%dT%H:%M:%S%z")
+  jq --arg component "$compName" \
+     --arg ctype "$t" \
+     --arg ctheme "$th" \
+     --arg ctimestamp "$TIMESTAMP" \
+     '. + [{ component: $component, type: $ctype, theme: $ctheme, timestamp: $ctimestamp }]' \
+     "$HISTORY_FILE" > temp_history.json && mv temp_history.json "$HISTORY_FILE"
+
+  echo "   [OK] Hecho!"
+}
+
+########################################
+# 6) Bucle para procesar todas las combinaciones solicitadas
+########################################
+for t in "${USE_TYPES[@]}"; do
+  for th in "${USE_THEMES[@]}"; do
+    process_combination "$COMPONENT_NAME" "$t" "$th"
+    echo
+  done
+done
+
+echo "----------------------------------------"
+echo "✅ Finalizado. Componente(s) procesado(s)."
+echo "----------------------------------------"
