@@ -1,5 +1,5 @@
 .btn-fresh{
-  background-color: yellow
+  background-color: oklch(var(--btn-color, var(--p)) / var(--tw-bg-opacity));
 }
 .btn {
   @apply rounded-btn gap-2 border-current font-medium no-underline duration-200 ease-out;

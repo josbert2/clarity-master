@@ -20,6 +20,34 @@ const config: Config = {
     require('clarity/plugin')
    
   ],
+  flyonui: {
+    themes: [
+      {
+        mytheme: {
+          "primary": "#00B4F0",
+          "primary-content": "#41494f",
+          "secondary": "#e74c3c",
+          "secondary-content": "#130201",
+          "accent": "#9b59b6",
+          "accent-content": "#ebddf1",
+          "neutral": "#95a5a6",
+          "neutral-content": "#080a0a",
+          "base-100": "#ecf0f1",
+          "base-200": "#cdd1d2",
+          "base-300": "#afb2b3",
+          "base-content": "#131414",
+          "info": "#1abc9c",
+          "info-content": "#000d09",
+          "success": "#2ecc71",
+          "success-content": "#010f04",
+          "warning": "#f1c40f",
+          "warning-content": "#140e00",
+          "error": "#e74c3c",
+          "error-content": "#130201"
+        }
+      }
+    ]
+  },
   theme: {
     extend: {
       fontFamily: {
