@@ -1,0 +1,35 @@
+
+
+
+
+
+@font-face {
+    font-family: 'Goldplay-Alt-Light';
+    src: url('goldplay/Goldplay-Alt-Light.otf');
+}
+
+
+
+@font-face {
+    font-family: 'Goldplay-Alt-Regular';
+    src: url('Goldplay-Alt-Regular.otf');
+}
+@font-face {
+    font-family: 'Goldplay-Alt-Medium';
+    src: url('Goldplay-Alt-Medium.otf');
+}
+
+
+@font-face {
+    font-family: 'Goldplay-Alt-Black';
+    src: url('Goldplay-Alt-Black.otf');
+}
+
+@font-face {
+    font-family: 'Goldplay-Alt-Bold';
+    src: url('Goldplay-Alt-Bold.otf');
+}
+
+.font-GoldPlay-Alt-Bold{
+    font-family: 'Goldplay-Alt-Bold';
+}
