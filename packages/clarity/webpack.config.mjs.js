@@ -36,7 +36,7 @@ module.exports = (env, argv) => {
 
       // Helpers
       'helper-apexcharts': './src/js/helpers/apexcharts/index.ts',
-      //'helper-clipboard': './src/js/helpers/clipboard/index.ts'
+      'helper-clipboard': './src/js/helpers/clipboard/index.ts'
     },
 
     module: {
@@ -72,7 +72,7 @@ module.exports = (env, argv) => {
       lodash: '_',
       'datatables.net': 'DataTable',
       dropzone: 'Dropzone',
-      //clipboard: 'ClipboardJS',
+      clipboard: 'ClipboardJS',
       noUiSlider: 'noUiSlider'
     },
     optimization: {

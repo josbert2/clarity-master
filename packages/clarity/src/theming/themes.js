@@ -25,7 +25,7 @@ module.exports = {
   },
   dark: {
     'color-scheme': 'dark',
-    primary: '#794DFF',
+    primary: '#00B4F0',
     'primary-content': '#EAE7FF',
     secondary: '#76717F',
     'secondary-content': '#fff',
@@ -34,7 +34,7 @@ module.exports = {
     neutral: '#928F9E',
     'neutral-content': '#141119',
     'base-100': '#282332',
-    'base-200': '#1D1A26',
+    'base-200': '#00B4F0',
     'base-300': '#4A4456',
     'base-content': '#B8B6C0',
     'base-shadow': '#141119',

@@ -63,4 +63,33 @@ declare global {
   }
 }
 
+
+declare module 'clipboard' {
+  interface ClipboardOptions {
+    target?: string | Element | (() => Element);
+    text?: string | (() => string);
+    container?: Element;
+  }
+
+  class Clipboard {
+    constructor(trigger: string | Element, options?: ClipboardOptions);
+    static isSupported(): boolean;
+    destroy(): void;
+    on(event: 'success' | 'error', handler: (e: any) => void): this;
+    off(event: 'success' | 'error', handler: (e: any) => void): this;
+  }
+
+  namespace Clipboard {
+    export interface Event {
+      action: string;
+      text?: string;
+      trigger?: Element;
+      clearSelection(): void;
+    }
+  }
+
+  export = Clipboard;
+}
+
+
 export {}
