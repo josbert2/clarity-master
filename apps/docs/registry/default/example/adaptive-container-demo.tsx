@@ -11,7 +11,7 @@ export default function AdaptiveContainerDemo() {
     <AdaptiveContainer className="bg-muted rounded-lg p-6">
       <h2 className="text-2xl font-bold mb-4">Adaptive Content</h2>
       <p className="mb-4">
-        This is a component that adapts to content size changes. Click the
+        This sdds is a component that adapts to content size changes. Click the
         button below to change the content size. sds
       </p>
       {expanded && (

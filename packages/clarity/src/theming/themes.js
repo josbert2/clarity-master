@@ -1,7 +1,7 @@
 module.exports = {
   light: {
     'color-scheme': 'light',
-    primary: '#794DFF',
+    primary: '#00B4F0',
     'primary-content': '#EAE7FF',
     secondary: '#76717F',
     'secondary-content': '#EFEEF0',

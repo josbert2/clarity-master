@@ -1,5 +1,5 @@
 .btn-fresh{
-
+  background-color: yellow
 }
 .btn {
   @apply rounded-btn gap-2 border-current font-medium no-underline duration-200 ease-out;
