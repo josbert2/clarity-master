@@ -1,8 +1,10 @@
 .btn-fresh{
-  background-color: oklch(var(--btn-color, var(--p)) / var(--tw-bg-opacity));
+  background-color: blue !important;
 }
+
+
 .btn {
-  @apply rounded-btn gap-2 border-current font-medium no-underline duration-200 ease-out;
+  @apply rounded-btn gap-2 border-current font-light no-underline duration-200 ease-out;
   border-width: var(--border-btn, 1px);
   transition-property: color, background-color, border-color, opacity, box-shadow, transform;
   @media (prefers-reduced-motion: no-preference) {
@@ -603,6 +605,31 @@
         @apply outline-error/30;
         border-color: transparent;
       }
+    }
+  }
+
+  /* Ghost */
+  &-ghost {
+    @apply text-base-content border-none outline-none border-2 bg-transparent shadow-none;
+    transition: all 0.4s ease-in-out;
+    background-size: 200% auto;
+    background-color: transparent;
+    @media (hover: hover) {
+      &:hover {
+        @apply border-base-200 shadow-md;
+        background-position: right center;
+      }
+    }
+
+    &:focus-visible { 
+      @apply outline outline-2 outline-offset-0;
+      border-color: transparent;
+      background-image: linear-gradient(
+        102deg,
+        oklch(var(--light-shade, var(--b2)) / var(--tw-bg-opacity)) 0%,
+        var(--dark-shade) 51%,
+        oklch(var(--light-shade, var(--b2)) / var(--tw-bg-opacity)) 100%
+      );
     }
   }
 

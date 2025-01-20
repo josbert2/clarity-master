@@ -100,5 +100,17 @@
     "type": "example",
     "theme": "default",
     "timestamp": "2025-01-15T15:29:52-0300"
+  },
+  {
+    "component": "button-disabled",
+    "type": "example",
+    "theme": "default",
+    "timestamp": "2025-01-20T11:38:25-0300"
+  },
+  {
+    "component": "button-sizes-demo",
+    "type": "example",
+    "theme": "default",
+    "timestamp": "2025-01-20T11:53:45-0300"
   }
 ]

@@ -13,7 +13,7 @@ type CustomTheme = Record<string, Record<string, string>>
 /**
  * https://flyonui.com/docs/themes/#
  */
-type Theme = 'light' | 'dark' | 'gourmet' | 'corporate' | 'luxury' | 'soft'
+type Theme = 'light' | 'dark' | 'gourmet' | 'corporate' | 'luxury' | 'soft' | 'entrekids'
 
 interface FlyonUIConfig {
   /**

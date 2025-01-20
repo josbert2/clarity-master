@@ -11,7 +11,9 @@ import { cn } from "@/registry/default/lib/utils"
 import FlyonuiScript from '@/components/FlyonuiScript';
 
 import '../../../packages/clarity/dist/styled.css'
-
+//import '../../../packages/clarity/dist/styled.css'
+//import '../../../packages/clarity/dist/styled.css'
+//import '../../../packages/clarity/dist/full.css'
 
 export const metadata: Metadata = {
   title: {
@@ -66,6 +68,7 @@ export default function Layout({ children }: { children: ReactNode }) {
       lang="en"
       className={cn(fontSans.variable, fontMono.variable)}
       suppressHydrationWarning
+      data-theme="entrekids"
     >
       <body className="flex flex-col min-h-svh font-sans antialiased">
         <RootProvider>{children}</RootProvider>

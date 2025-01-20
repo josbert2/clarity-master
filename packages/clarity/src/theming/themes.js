@@ -47,7 +47,7 @@ module.exports = {
     error: '#FB4141',
     'error-content': '#FFF5ED'
   },
-  gourmet: {
+  z: {
     'color-scheme': 'light',
     fontFamily: '"Rubik", system-ui, sans-serif',
     primary: '#F97316',
@@ -154,5 +154,29 @@ module.exports = {
     '--rounded-btn': '1.75rem',
     '--rounded-tooltip': '0.5rem',
     '--tab-radius': '0.75rem'
+  },
+  entrekids: {
+    'color-scheme': 'dark',
+    fontFamily: '"Avenir", system-ui, sans-serif',
+    primary: 'red',
+    'primary-content': '#FFFEF8',
+    secondary: '#76717F',
+    accent: '#FFC700',
+    'accent-content': '#FFFEF8',
+    neutral: '#FF8A65',
+    'neutral-content': '#FFFEF8',
+    'base-100': '#FFFEF8',
+    'base-200': '#FFFEF8',
+    'base-300': '#FFFEF8',
+    'base-content': '#FFFEF8',
+    'base-shadow': '#FFFEF8',
+    info: '#FF8A65',
+    'info-content': '#FFFEF8',
+    success: '#FF8A65',
+    'success-content': '#FFFEF8',
+    warning: '#FF8A65',
+    'warning-content': '#FFFEF8',
+    error: '#FF8A65',
+    'error-content': '#FFFEF8'
   }
 }

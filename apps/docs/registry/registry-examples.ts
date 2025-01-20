@@ -2,6 +2,28 @@ import { Registry } from "@/registry/schema"
 
 export const examples: Registry = [
   {
+    name: "button-sizes-demo",
+    type: "registry:example",
+    dependencies: [],
+    files: [
+      {
+        path: "example/button-sizes-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
+    name: "button-disabled",
+    type: "registry:example",
+    dependencies: [],
+    files: [
+      {
+        path: "example/button-disabled.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
     name: "button-variants-demo",
     type: "registry:example",
     dependencies: [],

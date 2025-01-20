@@ -1,5 +1,5 @@
 .btn {
-  @apply h-9.5 min-h-9.5 inline-flex shrink-0 cursor-pointer select-none flex-wrap items-center justify-center px-4 text-base font-medium;
+  @apply h-9.5 min-h-9.5 inline-flex shrink-0 cursor-pointer select-none flex-wrap items-center justify-center px-4 text-base;
   /* disabled */
   &-disabled,
   &[disabled],
