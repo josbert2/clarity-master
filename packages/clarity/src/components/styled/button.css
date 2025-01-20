@@ -4,7 +4,7 @@
 
 
 .btn {
-  @apply rounded-btn gap-2 border-current font-light no-underline duration-200 ease-out;
+  @apply rounded-btn gap-2 border-current  font-bold no-underline duration-200 ease-out ;
   border-width: var(--border-btn, 1px);
   transition-property: color, background-color, border-color, opacity, box-shadow, transform;
   @media (prefers-reduced-motion: no-preference) {

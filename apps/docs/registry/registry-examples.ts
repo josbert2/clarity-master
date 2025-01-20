@@ -2,6 +2,17 @@ import { Registry } from "@/registry/schema"
 
 export const examples: Registry = [
   {
+    name: "button-colors-demo",
+    type: "registry:example",
+    dependencies: [],
+    files: [
+      {
+        path: "example/button-colors-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+  },
+  {
     name: "button-sizes-demo",
     type: "registry:example",
     dependencies: [],

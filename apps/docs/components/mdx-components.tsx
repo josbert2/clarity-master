@@ -9,6 +9,7 @@ import {
   ComponentInstall,
   ManualInstall,
 } from "@/components/component-install"
+import {ComponentThemes } from "@/components/components-themes"
 import {
   Tabs,
   TabsContent,
@@ -47,6 +48,7 @@ const components = {
   ComponentInstall,
   CLIInstall,
   ManualInstall,
+  ComponentThemes
 }
 
 export { components }

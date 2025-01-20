@@ -112,5 +112,11 @@
     "type": "example",
     "theme": "default",
     "timestamp": "2025-01-20T11:53:45-0300"
+  },
+  {
+    "component": "button-colors-demo",
+    "type": "example",
+    "theme": "default",
+    "timestamp": "2025-01-20T13:09:10-0300"
   }
 ]

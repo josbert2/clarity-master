@@ -62,11 +62,20 @@ export const metadata: Metadata = {
   metadataBase: new URL("https://www.annui.org"),
 }
 
+import localFont from 'next/font/local'
+
+export const avenir = localFont({
+  src: '../public/fonts/Aveni/AvenirRegular.otf',
+  display: 'swap',
+});
+
+
+
 export default function Layout({ children }: { children: ReactNode }) {
   return (
     <html
       lang="en"
-      className={cn(fontSans.variable, fontMono.variable)}
+      className={cn( avenir.className)}
       suppressHydrationWarning
       data-theme="entrekids"
     >

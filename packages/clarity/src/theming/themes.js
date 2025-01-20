@@ -158,8 +158,8 @@ module.exports = {
   entrekids: {
     'color-scheme': 'dark',
     fontFamily: '"Avenir", system-ui, sans-serif',
-    primary: 'red',
-    'primary-content': '#FFFEF8',
+    primary: '#e2e2e3',
+    'primary-content': '#1f1f1f',
     secondary: '#76717F',
     accent: '#FFC700',
     'accent-content': '#FFFEF8',
