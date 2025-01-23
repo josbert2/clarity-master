@@ -196,3 +196,6 @@ Actualiza el archivo `package.json` en la raíz con scripts de Turborepo:
 
 Esta configuración inicial te permite trabajar eficientemente con múltiples aplicaciones y paquetes dentro de un mismo repositorio. Si necesitas adaptarlo a un caso específico, ¡puedes personalizarlo según tus necesidades!
 
+
+
+Todo: Migrate all v4 tailwind
