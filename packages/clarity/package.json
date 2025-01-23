@@ -83,6 +83,7 @@
     "init": "npm install && npm run build",
     "pretty": "prettier --write \"./**/*.{ts,tsx,json}\"  --ignore-path .prettierignore",
     "prettier": "prettier --write '**/*.{md,html,css,js,jsx,ts,tsx}' --config .prettierrc --ignore-path .prettierignore",
+    "start": "npm run watch",
     "watch": "npm-run-all --parallel watch:*",
     "watch:js": "webpack --watch",
     "watch:mjs": "webpack --config webpack.config.mjs.js --watch",

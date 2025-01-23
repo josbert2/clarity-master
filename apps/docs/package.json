@@ -8,12 +8,13 @@
     "build:registry": "tsx --tsconfig ./tsconfig.json ./scripts/build-registry.mts && prettier --log-level silent --write \"registry/**/*.{ts,tsx,mdx}\" --cache",
     "build:registry:js": "tsx --tsconfig ./tsconfig.experimenta.json ./scripts/build-registry.mts",
     "dev": "next dev",
+    "start": "next start",
     "format:check": "prettier --check \"**/*.{ts,tsx,mdx}\" --cache",
     "format:write": "prettier --write \"**/*.{ts,tsx,mdx}\" --cache",
     "postinstall": "fumadocs-mdx",
     "lint": "next lint",
-    "lint:fix": "next lint --fix",
-    "start": "next start"
+    "lint:fix": "next lint --fix"
+
   },
   "dependencies": {
     "@next/font": "^14.2.15",
