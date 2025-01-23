@@ -68,7 +68,7 @@ importers:
         version: 1.1.0(@types/react@19.0.2)(react@19.0.0)
       clarity:
         specifier: workspace:*
-        version: link:../../packages/clarity
+        version: link:../../packages/clarity-v4
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -259,7 +259,7 @@ importers:
     dependencies:
       clarity:
         specifier: workspace:*
-        version: link:../../packages/clarity
+        version: link:../../packages/clarity-v4
       classnames:
         specifier: ^2.5.1
         version: 2.5.1
@@ -302,7 +302,7 @@ importers:
     dependencies:
       clarity:
         specifier: workspace:*
-        version: link:../../packages/clarity
+        version: link:../../packages/clarity-v4
     devDependencies:
       '@babel/core':
         specifier: ^7.15.5
@@ -360,7 +360,7 @@ importers:
     dependencies:
       clarity:
         specifier: workspace:*
-        version: link:../../packages/clarity
+        version: link:../../packages/clarity-v4
       common:
         specifier: workspace:*
         version: link:../../packages/common
@@ -517,6 +517,103 @@ importers:
         specifier: ^5.0.1
         version: 5.1.4(webpack@5.97.1)
 
+  packages/clarity-v4:
+    dependencies:
+      '@popperjs/core':
+        specifier: ^2.11.8
+        version: 2.11.8
+      clipboard:
+        specifier: ^2.0.11
+        version: 2.0.11
+      css-selector-tokenizer:
+        specifier: ^0.8.0
+        version: 0.8.0
+      culori:
+        specifier: ^4.0.1
+        version: 4.0.1
+      picocolors:
+        specifier: ^1.1.1
+        version: 1.1.1
+      postcss-js:
+        specifier: ^4.0.1
+        version: 4.0.1(postcss@8.4.49)
+    devDependencies:
+      '@types/clipboard':
+        specifier: ^2.0.7
+        version: 2.0.10
+      '@types/dropzone':
+        specifier: ^5.7.8
+        version: 5.7.9
+      '@types/jquery':
+        specifier: ^3.5.30
+        version: 3.5.32
+      '@types/lodash':
+        specifier: ^4.17.6
+        version: 4.17.13
+      apexcharts:
+        specifier: ^4.1.0
+        version: 4.3.0
+      autoprefixer:
+        specifier: ^10.4.19
+        version: 10.4.20(postcss@8.4.49)
+      commit-and-tag-version:
+        specifier: ^12.0.0
+        version: 12.5.0
+      datatables.net:
+        specifier: ^2.1.3
+        version: 2.1.8
+      dts-bundle-generator:
+        specifier: ^9.0.0
+        version: 9.5.1
+      nouislider:
+        specifier: ^15.8.1
+        version: 15.8.1
+      npm-run-all:
+        specifier: ^4.1.5
+        version: 4.1.5
+      postcss:
+        specifier: ^8.4.35
+        version: 8.4.49
+      postcss-cli:
+        specifier: ^11.0.0
+        version: 11.0.0(jiti@2.4.2)(postcss@8.4.49)(tsx@4.19.2)
+      postcss-import:
+        specifier: ^16.0.0
+        version: 16.1.0(postcss@8.4.49)
+      prejss-cli:
+        specifier: 0.3.3
+        version: 0.3.3
+      prettier:
+        specifier: ^3.3.3
+        version: 3.4.2
+      prettier-plugin-tailwindcss:
+        specifier: ^0.6.5
+        version: 0.6.9(@ianvs/prettier-plugin-sort-imports@4.4.0(prettier@3.4.2))(prettier@3.4.2)
+      source-map-loader:
+        specifier: ^5.0.0
+        version: 5.0.0(webpack@5.97.1)
+      tailwindcss:
+        specifier: ^3.4.6
+        version: 3.4.17
+      terser-webpack-plugin:
+        specifier: ^5.3.9
+        version: 5.3.11(webpack@5.97.1)
+      ts-loader:
+        specifier: ^9.5.1
+        version: 9.5.1(typescript@5.6.3)(webpack@5.97.1)
+      typescript:
+        specifier: ^5.5.4
+        version: 5.6.3
+      watch:
+        specifier: ^1.0.2
+        version: 1.0.2
+      webpack:
+        specifier: ^5.90.2
+        version: 5.97.1(webpack-cli@5.1.4)
+      webpack-cli:
+        specifier: ^5.0.1
+        version: 5.1.4(webpack@5.97.1)
+
   packages/cli:
     dependencies:
       typescript:
@@ -645,7 +742,7 @@ importers:
         version: 18.2.7
       clarity:
         specifier: workspace:*
-        version: link:../clarity
+        version: link:../clarity-v4
       class-variance-authority:
         specifier: ^0.7.0
         version: 0.7.1
@@ -26560,6 +26657,16 @@ snapshots:
   ts-dedent@2.2.0: {}
 
   ts-interface-checker@0.1.13: {}
+
+  ts-loader@9.5.1(typescript@5.6.3)(webpack@5.97.1):
+    dependencies:
+      chalk: 4.1.2
+      enhanced-resolve: 5.18.0
+      micromatch: 4.0.8
+      semver: 7.6.3
+      source-map: 0.7.4
+      typescript: 5.6.3
+      webpack: 5.97.1(webpack-cli@5.1.4)
 
   ts-loader@9.5.1(typescript@5.7.2)(webpack@5.97.1):
     dependencies:
