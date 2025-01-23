@@ -51,7 +51,8 @@
     "docs": "vite build -- --docs",
     "lint:js": "eslint --ext .js,.jsx,.cjs,.mjs --ignore-path .gitignore ./",
     "lint:sass": "stylelint ./src/sass/**/*.{sass,scss}",
-    "backend": "nodemon backend"
+    "backend": "nodemon backend",
+    "start": "test"
   },
   "devDependencies": {
     "@vituum/vite-plugin-twig": "^1.1.0",

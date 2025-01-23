@@ -56,25 +56,30 @@ const ComponentThemes = () => {
                         <div key={themeKey}>
                             {/* Nombre del tema */}
                             <h2 className="text-xl font-bold mb-4">{themeKey}</h2>
-                            <div className="grid grid-cols-4 gap-2">
-                            {/* Itera sobre los colores dentro del tema */}
-                            {Object.keys(theme).map((colorKey) => {
-                                const colorValue = theme[colorKey];
+                            <div className="flex flex-col">
+                                {/* Itera sobre los colores dentro del tema */}
+                                {Object.keys(theme).map((colorKey) => {
+                                    const colorValue = theme[colorKey];
 
-                                return (
-                                <div key={colorKey} className="flex flex-col items-center">
-                                    {/* Muestra el color */}
-                                    <div
-                                    className="w-12 h-12 rounded shadow"
-                                    style={{ backgroundColor: colorValue }}
-                                    ></div>
-                                    {/* Nombre del color */}
-                                    <p className="text-sm text-gray-600 text-center">
-                                    {colorKey}
-                                    </p>
-                                </div>
-                                );
-                            })}
+                                    return (
+                                    <div key={colorKey} className="flex items-center mb-5 pb-3">
+                                        {/* Muestra el color */}
+                                        <div
+                                        className="w-20 h-20 rounded shadow"
+                                        style={{ backgroundColor: colorValue }}
+                                        ></div>
+                                        {/* Nombre del color */}
+                                        <div className="ml-2">
+                                            <span className="block mt-4 text-sm bg-[#f3f4f6] p-2 rounded-box text-gray-800 text-left">
+                                                {colorValue}
+                                            </span>
+                                            <p className="py-0 text-sm text-gray-600 text-center">
+                                                <b className="uppercase">{colorKey}</b>
+                                            </p>
+                                        </div>
+                                    </div>
+                                    );
+                                })}
                             </div>
                         </div>
                         );

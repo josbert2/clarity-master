@@ -8,6 +8,9 @@
   "bin": {
     "generated-registry": "packages/cli/index.ts"
   },
+  "scripts": {
+    "start": "test"
+  },
   "peerDependencies": {
     "typescript": "^5.0.0"
   }
