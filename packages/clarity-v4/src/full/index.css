@@ -1,4 +1,2 @@
-@import "../../dist/themes";
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+@import '../../dist/themes' layer(base);
+@import 'tailwindcss';

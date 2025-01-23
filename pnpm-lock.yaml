@@ -17,7 +17,7 @@ importers:
     devDependencies:
       '@types/bun':
         specifier: latest
-        version: 1.1.16
+        version: 1.2.0
 
   apps/docs:
     dependencies:
@@ -522,6 +522,9 @@ importers:
       '@popperjs/core':
         specifier: ^2.11.8
         version: 2.11.8
+      '@tailwindcss/postcss':
+        specifier: ^4.0.0
+        version: 4.0.0
       clipboard:
         specifier: ^2.0.11
         version: 2.0.11
@@ -537,6 +540,9 @@ importers:
       postcss-js:
         specifier: ^4.0.1
         version: 4.0.1(postcss@8.4.49)
+      tailwindcss:
+        specifier: ^4.0.0
+        version: 4.0.0
     devDependencies:
       '@types/clipboard':
         specifier: ^2.0.7
@@ -572,7 +578,7 @@ importers:
         specifier: ^4.1.5
         version: 4.1.5
       postcss:
-        specifier: ^8.4.35
+        specifier: ^8.4.49
         version: 8.4.49
       postcss-cli:
         specifier: ^11.0.0
@@ -592,9 +598,6 @@ importers:
       source-map-loader:
         specifier: ^5.0.0
         version: 5.0.0(webpack@5.97.1)
-      tailwindcss:
-        specifier: ^3.4.6
-        version: 3.4.17
       terser-webpack-plugin:
         specifier: ^5.3.9
         version: 5.3.11(webpack@5.97.1)
@@ -622,7 +625,7 @@ importers:
     devDependencies:
       '@types/bun':
         specifier: latest
-        version: 1.1.16
+        version: 1.2.0
 
   packages/common:
     devDependencies:
@@ -4026,8 +4029,8 @@ packages:
   '@types/babel__traverse@7.20.6':
     resolution: {integrity: sha512-r1bzfrm0tomOI8g1SzvCaQHo6Lcv6zu0EA+W2kHrt8dyrHQxGzBBL4kdkzIS+jBMV+EYcMAEAqXqYaLJq5rOZg==}
 
-  '@types/bun@1.1.16':
-    resolution: {integrity: sha512-E+ue6NMcn4FXC5bDRE1W/BXUVs01h5Mt02qH8/8HGCox9akuh8KNOFdwvaQS9TDgT2RmUyJYFRRqA60WtTnm2g==}
+  '@types/bun@1.2.0':
+    resolution: {integrity: sha512-5N1JqdahfpBlAv4wy6svEYcd/YfO2GNrbL95JOmFx8nkE6dbK4R0oSE5SpBA4vBRqgrOUAXF8Dpiz+gi7r80SA==}
 
   '@types/clipboard@2.0.10':
     resolution: {integrity: sha512-6CIsNdBfOTN92GHhQ0BaGY9KoV4DPH7ynCk5eggSDy3HW7OHLKWJUskL72uoVxl2kZ/XCq28TEgI0HKxLbRxyQ==}
@@ -4171,9 +4174,6 @@ packages:
 
   '@types/node@16.18.125':
     resolution: {integrity: sha512-w7U5ojboSPfZP4zD98d+/cjcN2BDW6lKH2M0ubipt8L8vUC7qUAC6ENKGSJL4tEktH2Saw2K4y1uwSjyRGKMhw==}
-
-  '@types/node@20.12.14':
-    resolution: {integrity: sha512-scnD59RpYD91xngrQQLGkE+6UrHUPzeKZWhhjBSa3HSkwjbQc38+q3RoIVEwxQGRw3M+j5hpNAM+lgV3cVormg==}
 
   '@types/node@20.6.2':
     resolution: {integrity: sha512-Y+/1vGBHV/cYk6OI1Na/LHzwnlNCAfU3ZNGrc1LdRe/LAIbdDPTTv/HU3M7yXN448aTVDq3eKRm2cg7iKLb8gw==}
@@ -5122,8 +5122,8 @@ packages:
   builtin-status-codes@3.0.0:
     resolution: {integrity: sha512-HpGFw18DgFWlncDfjTa2rcQ4W88O1mC8e8yZ2AvQY5KDaktSTwo+KRf6nHK6FRI5FyRyb/5T6+TSxfP7QyGsmQ==}
 
-  bun-types@1.1.43:
-    resolution: {integrity: sha512-W0wCtVH+bwFp7p3Zgs03CqxEDmXxEvmmUM/FBKgWIv9T8gyeotvIjIbHzuDScc2DphhRNtr7hJLCR5PspYL5qw==}
+  bun-types@1.2.0:
+    resolution: {integrity: sha512-KEaJxyZfbV/c4eyG0vyehDpYmBGreNiQbZIqvVHJwZ4BmeuWlNZ7EAzMN2Zcd7ailmS/tGVW0BgYbGf+lGEpWw==}
 
   busboy@1.6.0:
     resolution: {integrity: sha512-8SFQbg/0hQ9xy3UNTB0YEnsNBbWfhf7RtnzpL7TkBiTBRfrQ9Fxcnz7VJsleJpyp6rVLvXiuORqjlHi5q+PYuA==}
@@ -10631,7 +10631,6 @@ packages:
 
   reseter.css@2.0.0:
     resolution: {integrity: sha512-u98r3v0drXwxwRFhBywZOk+9LWoNVMy+tSClR6wJG+XXbrR/fpuuzbWQ8N5Uxczp3xMUX86E4PCWzitzsZ5GOg==}
-    bundledDependencies: []
 
   resize-observer-polyfill@1.5.1:
     resolution: {integrity: sha512-LwZrotdHOo12nQuZlHEmtuXdqGoOD0OhaxopaNFxWzInpEgaLWoVuAMbTzixuosCx2nEG58ngzW3vxdWoxIgdg==}
@@ -11856,9 +11855,6 @@ packages:
 
   undefsafe@2.0.5:
     resolution: {integrity: sha512-WxONCrssBM8TSPRqN5EmsjVrsv4A8X12J4ArBiiayv3DyyG3ZlIg6yysuuSYdZsVz3TKcTg2fd//Ujd4CHV1iA==}
-
-  undici-types@5.26.5:
-    resolution: {integrity: sha512-JlCMO+ehdEIKqlFxk6IfVoAUVmgz7cU7zD/h9XZ0qzeosSHmUJVOzSQvvYSYWXkFXC+IfLKSIffhv0sVZup6pA==}
 
   undici-types@6.19.8:
     resolution: {integrity: sha512-ve2KP6f/JnbPBFyobGHuerC9g1FYGn/F8n1LWTwNxCEzd6IfqTwUQcNXgEtmmQ6DlRrC1hrSrBnCZPokRrDHjw==}
@@ -16893,9 +16889,9 @@ snapshots:
     dependencies:
       '@babel/types': 7.26.3
 
-  '@types/bun@1.1.16':
+  '@types/bun@1.2.0':
     dependencies:
-      bun-types: 1.1.43
+      bun-types: 1.2.0
 
   '@types/clipboard@2.0.10':
     dependencies:
@@ -17047,10 +17043,6 @@ snapshots:
       form-data: 4.0.1
 
   '@types/node@16.18.125': {}
-
-  '@types/node@20.12.14':
-    dependencies:
-      undici-types: 5.26.5
 
   '@types/node@20.6.2': {}
 
@@ -18338,9 +18330,9 @@ snapshots:
 
   builtin-status-codes@3.0.0: {}
 
-  bun-types@1.1.43:
+  bun-types@1.2.0:
     dependencies:
-      '@types/node': 20.12.14
+      '@types/node': 22.10.3
       '@types/ws': 8.5.13
 
   busboy@1.6.0:
@@ -26841,8 +26833,6 @@ snapshots:
       through: 2.3.8
 
   undefsafe@2.0.5: {}
-
-  undici-types@5.26.5: {}
 
   undici-types@6.19.8: {}
 

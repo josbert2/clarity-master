@@ -1,8 +1,6 @@
-:root,
-[data-theme] {
-  background-color: theme(colors.base-100);
-  color: theme(colors.base-content);
-}
+
+@import "tailwindcss";
+@config "./tailwind.config.js";
 
 @supports not (color: oklch(0 0 0)) {
   :root {
