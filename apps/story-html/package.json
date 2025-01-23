@@ -1,0 +1,37 @@
+{
+  "name": "storybook-html",
+  "version": "1.0.0",
+  "description": "",
+  "private": true,
+  "scripts": {
+    "build": "build-storybook -c .storybook -o build",
+    "storybook": "start-storybook",
+    "start-open-ssl": "NODE_OPTIONS=--openssl-legacy-provider npm run storybook ",
+    "test": "htmlhint \"src/**/*.html\" && stylelint \"src/**/*.css\" && eslint \"src/**/*.js\""
+  },
+  "keywords": [],
+  "author": "Leon Machens",
+  "license": "MIT",
+  "dependencies": {
+    "clarity": "workspace:*"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.15.5",
+    "@storybook/addon-a11y": "^6.3.9",
+    "@storybook/addon-actions": "^6.3.9",
+    "@storybook/addon-console": "^1.2.3",
+    "@storybook/addon-design-assets": "^6.2.9",
+    "@storybook/addon-notes": "^5.3.21",
+    "@storybook/addon-postcss": "^2.0.0",
+    "@storybook/addon-viewport": "^6.3.9",
+    "@storybook/html": "^6.3.9",
+    "babel-loader": "^8.2.2",
+    "eslint": "^7.32.0",
+    "eslint-config-prettier": "^8.3.0",
+    "htmlhint": "^0.15.2",
+    "prettier": "^2.4.1",
+    "stylelint": "^13.13.1",
+    "stylelint-config-prettier": "^8.0.2",
+    "stylelint-config-standard": "^22.0.0"
+  }
+}

@@ -73,15 +73,22 @@ const defaultHTML = `
   <div class="relative -top-px col-span-full col-start-1 row-start-4 h-px bg-(--pattern-fg)"></div>
 </div>`;
 
-const defaultCSS = `@tailwind base;
-@tailwind components;
-@tailwind utilities;
+const defaultCSS = `
+  @import "tailwindcss";
 
-@layer components {
-  .custom-button {
-    @apply bg-blue-500 text-white px-4 py-2 rounded-lg hover:bg-blue-600 transition-colors;
+  @theme {
+    --font-display: "Satoshi", "sans-serif";
+    --breakpoint-3xl: 1920px;
+    --color-avocado-100: oklch(0.99 0 0);
+    --color-avocado-200: oklch(0.98 0.04 113.22);
+    --color-avocado-300: oklch(0.94 0.11 115.03);
+    --color-avocado-400: oklch(0.92 0.19 114.08);
+    --color-avocado-500: oklch(0.84 0.18 117.33);
+    --color-avocado-600: oklch(0.53 0.12 118.34);
+    --ease-fluid: cubic-bezier(0.3, 0, 0, 1);
+    --ease-snappy: cubic-bezier(0.2, 0, 0, 1);
   }
-}`;
+`;
 
 const defaultConfig = JSON.stringify({
   darkMode: ["class"],
@@ -104,6 +111,9 @@ export default function Home() {
   const [mounted, setMounted] = useState(false);
   const [activeTab, setActiveTab] = useState("html");
   const [iframeKey, setIframeKey] = useState(0);
+
+
+
 
   useEffect(() => {
     setMounted(true);
@@ -137,10 +147,12 @@ export default function Home() {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script src="https://cdn.tailwindcss.com"></script>
-  <style>${css}</style>
+  <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
+  <style type="text/tailwindcss">${css}</style>
   <script>
-    tailwind.config = ${config}
+    @theme {
+        --color-clifford: #da373d;
+      }
   </script>
 </head>
 <body>
@@ -269,15 +281,11 @@ export default function Home() {
               <html>
                 <head>
                   <meta charset="UTF-8">
-                  <script src="https://cdn.tailwindcss.com"></script>
+                  <script src="https://unpkg.com/@tailwindcss/browser@4"></script>
                   <script>
-                    try {
-                      tailwind.config = ${config};
-                    } catch (e) {
-                      console.error('Error al aplicar la configuración:', e);
-                    }
+                    
                   </script>
-                  <style>${css}</style>
+                  <style type="text/tailwindcss">${css}</style>
                 </head>
                 <body>
                   ${html}
