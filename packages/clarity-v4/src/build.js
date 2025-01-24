@@ -27,6 +27,7 @@ async function executeBaseCommands() {
 
 async function executeUtilitiesGlobalCommands() {
   try {
+
     await runCommand(
       `${postcssPath}/postcss --config src/utilities/global src/utilities/global/*.css --base src --dir dist`
     )
@@ -39,6 +40,7 @@ async function executeUtilitiesGlobalCommands() {
 
 async function executeUtilitiesUnstyledCommands() {
   try {
+    // node_modules/.bin/postcss --config src/utilities/unstyled src/utilities/unstyled/*.css --base src --dir dist
     await runCommand(
       `${postcssPath}/postcss --config src/utilities/unstyled src/utilities/unstyled/*.css --base src --dir dist`,
       { stdio: [] }
@@ -65,6 +67,7 @@ async function executeUtilitiesStyledCommands() {
 
 async function executeComponentsCommands() {
   try {
+    // node_modules/.bin/postcss --config src/components src/components/**/*.css --base src --dir dist
     await runCommand(`${postcssPath}/postcss --config src/components src/components/**/*.css --base src --dir dist`)
     await runCommand('cat dist/components/unstyled/*.css > dist/unstyled.css')
     await runCommand('cat dist/components/unstyled/*.css dist/components/styled/*.css > dist/styled.css')
