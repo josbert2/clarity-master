@@ -9,12 +9,25 @@ import { fontMono, fontSans } from "@/lib/fonts"
 import { Toaster } from "@/components/ui/sonner"
 import { cn } from "@/registry/default/lib/utils"
 
+
+
+
 //import FlyonuiScript from '@/components/FlyonuiScript';
 
 //import '../../../packages/clarity/dist/styled.css'
 //import '../../../packages/clarity/dist/styled.css'
 //import '../../../packages/clarity/dist/styled.css'
 //import '../../../packages/clarity/dist/full.css'
+
+import '../../../packages/daisy-5/packages/daisyui/daisyui.css'
+import './themes.css'
+
+
+
+
+
+
+
 
 export const metadata: Metadata = {
   title: {
@@ -78,7 +91,7 @@ export default function Layout({ children }: { children: ReactNode }) {
       lang="en"
       className={cn( avenir.className)}
       suppressHydrationWarning
-      data-theme="entrekids"
+      data-theme="silk"
     >
       <body className="flex flex-col min-h-svh font-sans antialiased">
         <RootProvider>{children}</RootProvider>
