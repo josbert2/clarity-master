@@ -65,9 +65,13 @@
     "themes.css"
   ],
   "scripts": {
-    "build": "bun build.js"
+    "build": "bun build.js",
+    "watch": "nodemon --legacy-watch --watch src --watch functions --ext js,css,html --exec \"npm run build --dev\""
+
   },
   "devDependencies": {
-    "node-sass": "^9.0.0"
+    "chokidar": "^4.0.3",
+    "node-sass": "^9.0.0",
+    "nodemon": "^3.1.9"
   }
 }

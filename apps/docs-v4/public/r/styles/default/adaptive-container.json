@@ -1,0 +1,16 @@
+{
+  "name": "adaptive-container",
+  "type": "registry:ui",
+  "dependencies": [
+    "react-use-measure",
+    "motion"
+  ],
+  "files": [
+    {
+      "path": "annui/adaptive-container.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\nimport {\n  AnimatePresence,\n  AnimationControls,\n  motion,\n  TargetAndTransition,\n  Transition,\n} from \"motion/react\"\nimport useMeasure from \"react-use-measure\"\n\nconst AdaptiveContainer = ({\n  children,\n  animate,\n  transition,\n  ...props\n}: React.ComponentPropsWithoutRef<\"div\"> & {\n  animate?: AnimationControls | TargetAndTransition\n  transition?: Transition\n}) => {\n  const [ref, { width, height }] = useMeasure()\n\n  return (\n    <AnimatePresence initial={false}>\n      <motion.div\n        animate={{\n          height: height > 0 ? height : undefined,\n          width: width > 0 ? width : undefined,\n          ...animate,\n        }}\n        transition={{\n          type: \"spring\",\n          stiffness: 100,\n          damping: 10,\n          ...transition,\n        }}\n        className=\"overflow-hidden\"\n      >\n        <div ref={ref} {...props}>\n          {children}\n        </div>\n      </motion.div>\n    </AnimatePresence>\n  )\n}\n\nexport { AdaptiveContainer }\n",
+      "type": "registry:ui",
+      "target": ""
+    }
+  ]
+}

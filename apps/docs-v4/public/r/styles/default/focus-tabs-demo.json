@@ -1,0 +1,15 @@
+{
+  "name": "focus-tabs-demo",
+  "type": "registry:example",
+  "registryDependencies": [
+    "focus-tabs"
+  ],
+  "files": [
+    {
+      "path": "example/focus-tabs-demo.tsx",
+      "content": "\"use client\"\n\nimport { LockIcon, SettingsIcon, UserIcon } from \"lucide-react\"\n\nimport {\n  Tabs,\n  TabsContent,\n  TabsList,\n  TabsTrigger,\n  TabsTriggerIcon,\n  TabsTriggerText,\n} from \"@/registry/default/annui/focus-tabs\"\n\nexport default function FocusTabsDemo() {\n  return (\n    <Tabs defaultValue=\"account\">\n      <TabsList>\n        <TabsTrigger value=\"account\">\n          <TabsTriggerIcon>\n            <UserIcon />\n          </TabsTriggerIcon>\n          <TabsTriggerText>Account</TabsTriggerText>\n        </TabsTrigger>\n        <TabsTrigger value=\"password\">\n          <TabsTriggerIcon>\n            <LockIcon />\n          </TabsTriggerIcon>\n          <TabsTriggerText>Password</TabsTriggerText>\n        </TabsTrigger>\n        <TabsTrigger value=\"settings\">\n          <TabsTriggerIcon>\n            <SettingsIcon />\n          </TabsTriggerIcon>\n          <TabsTriggerText>Settings</TabsTriggerText>\n        </TabsTrigger>\n      </TabsList>\n      <DemoContent value=\"account\">This is the account content.</DemoContent>\n      <DemoContent value=\"password\">This is the password content.</DemoContent>\n      <DemoContent value=\"settings\">This is the settings content.</DemoContent>\n    </Tabs>\n  )\n}\n\nconst DemoContent = ({\n  value,\n  children,\n}: {\n  value: string\n  children?: React.ReactNode\n}) => {\n  return (\n    <TabsContent\n      className=\"bg-muted text-muted-foreground p-4 rounded-md h-32 w-72\"\n      value={value}\n    >\n      {children}\n    </TabsContent>\n  )\n}\n",
+      "type": "registry:example",
+      "target": ""
+    }
+  ]
+}

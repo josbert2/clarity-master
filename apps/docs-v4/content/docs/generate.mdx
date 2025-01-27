@@ -1,0 +1,95 @@
+---
+title: Generate Registry
+description: Step-by-step guide to install and set up AnnUI in your React project
+icon: PackagePlus
+---
+## Auto Installation
+Para gestionar el auto Generate debemos ejecutar el `registry.sh`
+
+```javascript
+ ./registry.sh --component=MyTest --type=example --theme=gourmet
+
+```
+
+
+```javascript
+  --component=NameComponent
+  --type=[example, ui]  
+  --theme=[default, gourmet ]
+```
+
+## Manual Installation
+
+Ir primero al archivo `registry-ui.tsx` para añadir un nuevo ui de registro dentro 
+
+<Steps>
+
+<Step>
+
+Ejemplo crearemos avatar 
+
+```javascript
+{
+    name: "Avatar",
+    type: "registry:ui",
+    dependencies: [],
+    files: [
+      {
+        path: "annui/avatar.tsx",
+        type: "registry:ui",
+      },
+    ],
+}
+```
+
+
+</Step>
+
+<Step>
+
+Esto lo tenemos que añadir con su tipo y sus dependencias, ahora dirigirnos a `annui/avatar.tsx` para crear el componente
+
+
+```javascript
+{
+    name: "avatar-demo",
+    type: "registry:example",
+    registryDependencies: [],
+    files: [
+      {
+        path: "example/avatar-demo.tsx",
+        type: "registry:example",
+      },
+    ],
+},
+```
+
+</Step>
+
+<Step>
+
+Una vez tenemos el demo o example lo tenemos que ejecutar 
+
+```javascript
+npm run build:registry
+```
+
+Recordemos que si tenemos mas temas debemos ponerlo en el otro osea replicarlo 
+
+</Step>
+
+<Step>
+
+Por ultimo crear un docs en `content/docs` |  `avatar.mdx` para añadirlo a las url
+
+Editar el contenido, asinar el nombre del demo creado 
+```javascript
+<ComponentPreview
+  name="avatar-demo"
+  description="A component that allows you to create an adaptive container."
+/>
+```
+</Step>
+
+</Steps>
+

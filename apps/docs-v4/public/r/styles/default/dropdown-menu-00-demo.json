@@ -1,0 +1,16 @@
+{
+  "name": "dropdown-menu-00-demo",
+  "type": "registry:example",
+  "registryDependencies": [
+    "dropdown-menu-00",
+    "button"
+  ],
+  "files": [
+    {
+      "path": "example/dropdown-menu-00-demo.tsx",
+      "content": "\"use client\"\n\nimport { ChevronRight, Home, LogOut, Settings } from \"lucide-react\"\n\nimport { Button } from \"@/components/ui/button\"\nimport {\n  DropdownMenu,\n  DropdownMenuContent,\n  DropdownMenuItem,\n  DropdownMenuItemDescription,\n  DropdownMenuItemIcon,\n  DropdownMenuItemTitle,\n  DropdownMenuSeparator,\n  DropdownMenuTrigger,\n} from \"@/registry/default/annui/dropdown-menu-00\"\n\nexport default function DropdownMenu00Demo() {\n  return (\n    <DropdownMenu>\n      <DropdownMenuTrigger asChild>\n        <Button>Open</Button>\n      </DropdownMenuTrigger>\n      <DropdownMenuContent>\n        <DropdownMenuItem>\n          <DropdownMenuItemIcon>\n            <Home />\n          </DropdownMenuItemIcon>\n          <DropdownMenuItemTitle>Home</DropdownMenuItemTitle>\n          <DropdownMenuItemDescription>Home page</DropdownMenuItemDescription>\n        </DropdownMenuItem>\n        <DropdownMenuItem>\n          <DropdownMenuItemIcon>\n            <Settings />\n          </DropdownMenuItemIcon>\n          <DropdownMenuItemTitle>Settings</DropdownMenuItemTitle>\n          <DropdownMenuItemDescription>\n            Settings page\n          </DropdownMenuItemDescription>\n        </DropdownMenuItem>\n        <DropdownMenuItem>\n          <DropdownMenuItemIcon>\n            <ChevronRight />\n          </DropdownMenuItemIcon>\n          <DropdownMenuItemTitle>More</DropdownMenuItemTitle>\n          <DropdownMenuItemDescription>More page</DropdownMenuItemDescription>\n        </DropdownMenuItem>\n        <DropdownMenuSeparator />\n        <DropdownMenuItem>\n          <DropdownMenuItemIcon>\n            <LogOut />\n          </DropdownMenuItemIcon>\n          <DropdownMenuItemTitle>Logout</DropdownMenuItemTitle>\n          <DropdownMenuItemDescription>Logout page</DropdownMenuItemDescription>\n        </DropdownMenuItem>\n      </DropdownMenuContent>\n    </DropdownMenu>\n  )\n}\n",
+      "type": "registry:example",
+      "target": ""
+    }
+  ]
+}

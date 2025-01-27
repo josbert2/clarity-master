@@ -1,0 +1,76 @@
+---
+title: Vercel Tabs
+description: A modern, accessible tabs component styled after Vercel's design system, featuring smooth transitions and keyboard navigation support.
+---
+
+<ComponentPreview name="vercel-tabs-demo" className="z-0" />
+
+## Installation
+
+<ComponentInstall>
+
+<CLIInstall>
+  
+```bash
+npx shadcn@latest add https://annui.org/r/vercel-tabs
+```
+
+</CLIInstall>
+
+<ManualInstall>
+
+<Steps>
+
+<Step>
+
+Install the following dependencies
+
+</Step>
+
+```bash
+npm install @radix-ui/react-tabs @radix-ui/react-use-controllable-state
+```
+
+<Step>
+
+Copy and paste the following code into your project
+
+</Step>
+
+<ComponentSource name="vercel-tabs" />
+
+<Step>
+
+Update the import paths to match your project setup
+
+</Step>
+
+</Steps>
+
+</ManualInstall>
+
+</ComponentInstall>
+
+## Usage
+
+```tsx
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger,
+} from "@/components/ui/vercel-tabs"
+```
+
+```tsx
+<Tabs defaultValue="account">
+  <TabsList>
+    <TabsTrigger value="account">Account</TabsTrigger>
+    <TabsTrigger value="notifications">Notifications</TabsTrigger>
+  </TabsList>
+  <TabsContent value="account">This is the account content.</TabsContent>
+  <TabsContent value="notifications">
+    This is the notifications content.
+  </TabsContent>
+</Tabs>
+```

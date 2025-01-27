@@ -1,0 +1,15 @@
+{
+  "name": "icon-hover-button-outline",
+  "type": "registry:example",
+  "registryDependencies": [
+    "icon-hover-button"
+  ],
+  "files": [
+    {
+      "path": "example/icon-hover-button-outline.tsx",
+      "content": "\"use client\"\n\nimport { PlusIcon } from \"lucide-react\"\n\nimport {\n  IconHoverButton,\n  IconHoverButtonIcon,\n  IconHoverButtonText,\n} from \"@/registry/default/annui/icon-hover-button\"\n\nexport default function IconHoverButtonOutline() {\n  return (\n    <IconHoverButton variant=\"outline\">\n      <IconHoverButtonIcon>\n        <PlusIcon />\n      </IconHoverButtonIcon>\n      <IconHoverButtonText>Outline</IconHoverButtonText>\n    </IconHoverButton>\n  )\n}\n",
+      "type": "registry:example",
+      "target": ""
+    }
+  ]
+}

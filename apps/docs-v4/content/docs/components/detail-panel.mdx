@@ -1,0 +1,108 @@
+---
+title: Detail Panel
+description: A component that allows you to create a detail panel.
+---
+
+<ComponentPreview name="detail-panel-demo" />
+
+## Installation
+
+<ComponentInstall>
+
+<CLIInstall>
+
+```bash
+npx shadcn@latest add https://annui.org/r/detail-panel
+```
+
+</CLIInstall>
+
+<ManualInstall>
+
+<Steps>
+
+<Step>
+
+Install the following dependencies
+
+</Step>
+
+```bash
+npm install @radix-ui/react-slot
+```
+
+<Step>
+
+Copy and paste the following code into your project
+
+</Step>
+
+<ComponentSource name="detail-panel" />
+
+<Step>
+
+Update the import paths to match your project setup
+
+</Step>
+
+</Steps>
+
+</ManualInstall>
+
+</ComponentInstall>
+
+## Usage
+
+```tsx
+import {
+  DetailPanel,
+  DetailPanelHeader,
+  DetailPanelHeaderAction,
+  DetailPanelHeaderActions,
+  DetailPanelHeaderTitle,
+  DetailPanelProperties,
+  DetailPanelProperty,
+  DetailPanelPropertyLabel,
+  DetailPanelPropertyValue,
+  DetailPanelSection,
+  DetailPanelSectionContent,
+  DetailPanelSectionDescription,
+  DetailPanelSectionTitle,
+} from "@/components/ui/detail-panel"
+```
+
+```tsx
+<DetailPanel>
+  <DetailPanelHeader>
+    <DetailPanelHeaderTitle>Detail Panel</DetailPanelHeaderTitle>
+    <DetailPanelHeaderActions>
+      <DetailPanelHeaderAction>Edit</DetailPanelHeaderAction>
+    </DetailPanelHeaderActions>
+  </DetailPanelHeader>
+
+  <DetailPanelProperties>
+    <DetailPanelProperty>
+      <DetailPanelPropertyLabel>Property Label</DetailPanelPropertyLabel>
+      <DetailPanelPropertyValue>Property Value</DetailPanelPropertyValue>
+    </DetailPanelProperty>
+  </DetailPanelProperties>
+
+  <DetailPanelSection>
+    <DetailPanelSectionTitle>Section Title</DetailPanelSectionTitle>
+    <DetailPanelSectionDescription>
+      Section Description
+    </DetailPanelSectionDescription>
+    <DetailPanelSectionContent>Section Content</DetailPanelSectionContent>
+  </DetailPanelSection>
+</DetailPanel>
+```
+
+## Examples
+
+### With Sheet
+
+<ComponentPreview name="detail-panel-sheet" />
+
+## Credits
+
+Inspired by [arvsrn's design shared on X](https://x.com/arvsrn/status/1869314160246272121). This component provides an elegant detail panel interface interactive icon buttons.

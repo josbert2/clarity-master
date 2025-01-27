@@ -1,0 +1,15 @@
+{
+  "name": "steps-00-demo",
+  "type": "registry:example",
+  "registryDependencies": [
+    "steps-00"
+  ],
+  "files": [
+    {
+      "path": "example/steps-00-demo.tsx",
+      "content": "\"use client\"\n\nimport { StepsCard, StepsCardContent } from \"@/registry/default/annui/steps-00\"\n\nexport default function Steps00Demo() {\n  return (\n    <StepsCard>\n      <StepsCardContent className=\"bg-gradient-to-b from-white to-gray-50\" />\n    </StepsCard>\n  )\n}\n",
+      "type": "registry:example",
+      "target": ""
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "name": "use-mutation-observer",
+  "type": "registry:hook",
+  "files": [
+    {
+      "path": "hooks/use-mutation-observer.ts",
+      "content": "\"use client\";\n\nimport { useEffect } from \"react\";\n\nimport type { RefObject } from \"react\";\n\nexport const useMutationObserver = <T extends HTMLElement>(\n  ref: RefObject<T>,\n  callback: MutationCallback,\n  options: MutationObserverInit\n): void => {\n  useEffect(() => {\n    const element = ref.current;\n\n    if (!element) return;\n\n    const observer = new MutationObserver(callback);\n    observer.observe(element, options);\n\n    return () => {\n      observer.disconnect();\n    };\n  }, [ref, callback, options]);\n};\n",
+      "type": "registry:hook",
+      "target": ""
+    }
+  ]
+}

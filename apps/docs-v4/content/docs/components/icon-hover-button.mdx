@@ -1,0 +1,114 @@
+---
+title: Icon Hover Button
+description: A button component that reveals text on hover with an icon.
+---
+
+<ComponentPreview name="icon-hover-button-demo" />
+
+## Installation
+
+<ComponentInstall>
+
+<CLIInstall>
+  
+```bash
+npx shadcn@latest add https://annui.org/r/icon-hover-button
+```
+
+</CLIInstall>
+
+<ManualInstall>
+
+<Steps>
+
+<Step>
+
+Copy and paste the following code into your project
+
+</Step>
+
+<ComponentSource name="icon-hover-button" />
+
+<Step>
+
+Update the import paths to match your project setup
+
+</Step>
+
+</Steps>
+
+</ManualInstall>
+
+</ComponentInstall>
+
+## Usage
+
+```tsx
+import { PlusIcon } from "lucide-react"
+
+import {
+  IconHoverButton,
+  IconHoverButtonIcon,
+  IconHoverButtonText,
+} from "@/components/ui/icon-hover-button"
+```
+
+```tsx
+<IconHoverButton>
+  <IconHoverButtonIcon>
+    <PlusIcon />
+  </IconHoverButtonIcon>
+  <IconHoverButtonText>Button</IconHoverButtonText>
+</IconHoverButton>
+```
+
+## Examples
+
+### Both Side
+
+<ComponentPreview
+  name="icon-hover-button-both-side"
+  description="Icon hover button with icons on both sides."
+/>
+
+### Primary
+
+<ComponentPreview
+  name="icon-hover-button-primary"
+  description="Icon hover button with primary styling."
+/>
+
+### Secondary
+
+<ComponentPreview
+  name="icon-hover-button-secondary"
+  description="Icon hover button with secondary styling."
+/>
+
+### Destructive
+
+<ComponentPreview
+  name="icon-hover-button-destructive"
+  description="A component that allows you to create an icon hover button with the destructive variant."
+/>
+
+### Outline
+
+<ComponentPreview
+  name="icon-hover-button-outline"
+  description="A component that allows you to create an icon hover button with the outline variant."
+/>
+
+### Ghost
+
+<ComponentPreview
+  name="icon-hover-button-ghost"
+  description="A component that allows you to create an icon hover button with the ghost variant."
+/>
+
+### Link
+
+<ComponentPreview
+  name="icon-hover-button-link"
+  description="A component that allows you to create an icon hover button with the link variant."
+/>

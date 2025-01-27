@@ -1,0 +1,13 @@
+{
+  "title": "ui",
+  "root": true,
+  "pages": [
+    "---Getting Started---",
+    "index",
+    "generate",
+    "installation",
+    "themes",
+    "---Components---",
+    "...components"
+  ]
+}

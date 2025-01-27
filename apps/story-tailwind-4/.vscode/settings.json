@@ -1,6 +1,0 @@
-{
-  "css.validate": false,
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "editor.formatOnSave": true,
-  "stylelint.enable": true
-}

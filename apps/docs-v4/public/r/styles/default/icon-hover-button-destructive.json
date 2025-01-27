@@ -1,0 +1,15 @@
+{
+  "name": "icon-hover-button-destructive",
+  "type": "registry:example",
+  "registryDependencies": [
+    "icon-hover-button"
+  ],
+  "files": [
+    {
+      "path": "example/icon-hover-button-destructive.tsx",
+      "content": "\"use client\"\n\nimport { PlusIcon } from \"lucide-react\"\n\nimport {\n  IconHoverButton,\n  IconHoverButtonIcon,\n  IconHoverButtonText,\n} from \"@/registry/default/annui/icon-hover-button\"\n\nexport default function IconHoverButtonDestructive() {\n  return (\n    <IconHoverButton variant=\"destructive\">\n      <IconHoverButtonIcon>\n        <PlusIcon />\n      </IconHoverButtonIcon>\n      <IconHoverButtonText>Destructive</IconHoverButtonText>\n    </IconHoverButton>\n  )\n}\n",
+      "type": "registry:example",
+      "target": ""
+    }
+  ]
+}

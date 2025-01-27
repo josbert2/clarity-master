@@ -1,0 +1,88 @@
+---
+title: Select Filter
+description: A customizable select filter component with color indicators and clear functionality.
+---
+
+<ComponentPreview
+  name="select-filter-demo"
+  description="A component that allows you to create a select filter."
+/>
+
+## Installation
+
+<ComponentInstall>
+
+<CLIInstall>
+  
+```bash
+npx shadcn@latest add https://annui.org/r/select-filter
+```
+
+</CLIInstall>
+
+<ManualInstall>
+
+<Steps>
+
+<Step>
+
+Install the following dependencies
+
+</Step>
+
+```bash
+npm install @radix-ui/react-use-controllable-state colord
+```
+
+<Step>
+
+Copy and paste the following code into your project
+
+</Step>
+
+<ComponentSource name="select-filter" />
+
+<Step>
+
+Update the import paths to match your project setup
+
+</Step>
+
+</Steps>
+
+</ManualInstall>
+
+</ComponentInstall>
+
+## Usage
+
+```tsx
+import {
+  SelectFilter,
+  SelectFilterClear,
+  SelectFilterHeader,
+  SelectFilterItem,
+  SelectFilterList,
+  SelectFilterSelected,
+  SelectFilterTitle,
+} from "@/components/ui/select-filter"
+```
+
+```tsx
+<SelectFilter>
+  <SelectFilterSelected className="h-12" />
+  <SelectFilterList>
+    <SelectFilterHeader>
+      <SelectFilterTitle>Select Filter</SelectFilterTitle>
+      <SelectFilterClear>Clear</SelectFilterClear>
+    </SelectFilterHeader>
+    <SelectFilterItem color="#ff0000" value="product">
+      Product
+    </SelectFilterItem>
+  </SelectFilterList>
+</SelectFilter>
+```
+
+## Credits
+
+This component is inspired by [Kumail Nanji's design shared on X](https://x.com/KumailNanji/status/1856692491702902929).

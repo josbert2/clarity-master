@@ -1,0 +1,18 @@
+{
+  "name": "use-attribute-observer",
+  "type": "registry:hook",
+  "files": [
+    {
+      "path": "hooks/use-attribute-observer.ts",
+      "content": "\"use client\";\n\nimport { useEffect, useState } from \"react\";\n\nimport type { RefObject } from \"react\";\n\nimport { useMutationObserver } from \"@/registry/default/hooks/use-mutation-observer\";\n\ntype AttributeObserverResult = [exist: boolean, value: string | null];\n\nexport const useAttributeObserver = <T extends HTMLElement>(\n  ref: RefObject<T>,\n  attributeName: string\n): AttributeObserverResult => {\n  const [attributeResult, setAttributeResult] =\n    useState<AttributeObserverResult>([false, null]);\n\n  useMutationObserver(\n    ref,\n    (mutations) => {\n      const element = ref.current;\n      if (!element) return;\n\n      const mutation = mutations.find(\n        (m) => m.type === \"attributes\" && m.attributeName === attributeName\n      );\n      if (mutation) {\n        const value = element.getAttribute(attributeName);\n        setAttributeResult([value !== null, value]);\n      }\n    },\n    { attributes: true, attributeFilter: [attributeName] }\n  );\n\n  useEffect(() => {\n    if (ref.current) {\n      const initialValue = ref.current.getAttribute(attributeName);\n      setAttributeResult([initialValue !== null, initialValue]);\n    }\n  }, [ref, attributeName]);\n\n  return attributeResult;\n};\n",
+      "type": "registry:hook",
+      "target": ""
+    },
+    {
+      "path": "hooks/use-mutation-observer.ts",
+      "content": "\"use client\";\n\nimport { useEffect } from \"react\";\n\nimport type { RefObject } from \"react\";\n\nexport const useMutationObserver = <T extends HTMLElement>(\n  ref: RefObject<T>,\n  callback: MutationCallback,\n  options: MutationObserverInit\n): void => {\n  useEffect(() => {\n    const element = ref.current;\n\n    if (!element) return;\n\n    const observer = new MutationObserver(callback);\n    observer.observe(element, options);\n\n    return () => {\n      observer.disconnect();\n    };\n  }, [ref, callback, options]);\n};\n",
+      "type": "registry:hook",
+      "target": ""
+    }
+  ]
+}

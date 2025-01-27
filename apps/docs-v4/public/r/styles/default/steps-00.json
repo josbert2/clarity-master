@@ -1,0 +1,13 @@
+{
+  "name": "steps-00",
+  "type": "registry:ui",
+  "registryDependencies": ["steps", "card"],
+  "files": [
+    {
+      "path": "annui/steps-00.tsx",
+      "content": "\"use client\"\n\nimport * as React from \"react\"\n\nimport { Card, CardContent } from \"@/components/ui/card\"\nimport { Steps } from \"@/registry/default/annui/steps\"\n\nconst StepsCard = React.forwardRef<\n  React.ComponentRef<typeof Steps>,\n  React.ComponentPropsWithoutRef<typeof Steps>\n>(({ children, ...props }, ref) => {\n  return (\n    <Steps asChild ref={ref} {...props}>\n      <Card className=\"flex flex-col gap-4 p-0\">{children}</Card>\n    </Steps>\n  )\n})\nStepsCard.displayName = \"StepsCard\"\n\nconst StepsCardContent = React.forwardRef<\n  React.ComponentRef<typeof CardContent>,\n  React.ComponentPropsWithoutRef<typeof CardContent>\n>(({ children, ...props }, ref) => {\n  return (\n    <CardContent ref={ref} {...props}>\n      {children}\n    </CardContent>\n  )\n})\nStepsCardContent.displayName = \"StepsCardContent\"\n\nconst StepsCardFooter = React.forwardRef<\n  React.ComponentRef<typeof Card>,\n  React.ComponentPropsWithoutRef<typeof Card>\n>(({ children, ...props }, ref) => {\n  return (\n    <Card ref={ref} {...props}>\n      {children}\n    </Card>\n  )\n})\nStepsCardFooter.displayName = \"StepsCardFooter\"\n\nexport { StepsCard, StepsCardContent, StepsCardFooter }\n",
+      "type": "registry:ui",
+      "target": ""
+    }
+  ]
+}

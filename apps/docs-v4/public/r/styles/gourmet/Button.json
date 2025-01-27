@@ -1,0 +1,13 @@
+{
+  "name": "Button",
+  "type": "registry:ui",
+  "dependencies": [],
+  "files": [
+    {
+      "path": "annui/button.tsx",
+      "content": "import React from \"react\"\n\nexport default function button() {\n  return (\n    <>\n      <button className=\"btn btn-fresh\">Default</button>\n    </>\n  )\n}\n",
+      "type": "registry:ui",
+      "target": ""
+    }
+  ]
+}

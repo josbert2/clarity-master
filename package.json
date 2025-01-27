@@ -16,6 +16,9 @@
     "typescript": "^5.0.0"
   },
   "dependencies": {
+    "@tailwindcss/postcss": "^4.0.0",
+    "postcss": "^8.5.1",
+    "tailwindcss": "^4.0.0",
     "turbo": "^2.3.3"
   },
   "packageManager": "pnpm@9.12.3"

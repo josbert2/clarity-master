@@ -12,7 +12,11 @@ import { removeFiles } from "./functions/removeFiles.js"
 import { copyFile } from "./functions/copyFile.js"
 import { packCss } from "./functions/packCss.js"
 import { report } from "./functions/report.js"
-import { version } from "./package.json"
+//import { version } from "./package.json" 
+import pkg from "./package.json" assert { type: "json" }
+const { version } = pkg
+
+
 
 const isDev = process.argv.includes("--dev")
 
