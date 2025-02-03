@@ -1,7 +1,7 @@
-@import "tailwindcss";
-@plugin "daisyui";
-
-
+@import 'tailwindcss';
+@import 'fumadocs-ui/css/neutral.css';
+@import 'fumadocs-ui/css/preset.css';
+@source '../node_modules/fumadocs-ui/dist/**/*.js';
 
 :root {
   --background: 0 0% 100%;
@@ -40,176 +40,57 @@
 
 }
 
+@theme {
+  --color-background: 0 0% 100%;
+  --color-foreground: 0 0% 3.9%;
+  --color-card: 0 0% 100%;
+  --color-card-foreground: 0 0% 3.9%;
+  --color-popover: 0 0% 100%;
+  --color-popover-foreground: 0 0% 3.9%;
+  --color-primary: 0 0% 9%;
+  --color-primary-foreground: 0 0% 98%;
+  --color-secondary: 0 0% 96.1%;
+  --color-secondary-foreground: 0 0% 9%;
+  --color-muted: 0 0% 96.1%;
+  --color-muted-foreground: 0 0% 45.1%;
+  --color-accent: 0 0% 96.1%;
+  --color-accent-foreground: 0 0% 9%;
+  --color-destructive: 0 84.2% 60.2%;
+  --color-destructive-foreground: 0 0% 98%;
+  --color-border: 0 0% 89.8%;
+  --color-input: 0 0% 89.8%;
+  --color-ring: 0 0% 3.9%;
+  --color-chart-1: 12 76% 61%;
+  --color-chart-2: 173 58% 39%;
+  --color-chart-3: 197 37% 24%;
+  --color-chart-4: 43 74% 66%;
+  --color-chart-5: 27 87% 67%;
+  --radius: 0.5rem;
+  --sidebar-background: 0 0% 98%;
+  --sidebar-foreground: 240 5.3% 26.1%;
+  --sidebar-primary: 240 5.9% 10%;
+  --sidebar-primary-foreground: 0 0% 98%;
+  --sidebar-accent: 240 4.8% 95.9%;
+  --sidebar-accent-foreground: 240 5.9% 10%;
+  --sidebar-border: 220 13% 91%;
+  --sidebar-ring: 217.2 91.2% 59.8%;
+
+  --color-content-code: #1d202a;
+
+}
+
 @layer base {
-  * {
-    @apply border-border;
-  }
+ 
   body {
     @apply bg-background text-foreground;
   }
 }
 
 
-@plugin "daisyui/theme" {
-  name: "entrekids";
-  default: false;
-  prefersdark: false;
-  color-scheme: "light";
-  --color-base-100: oklch(98% 0 0);
-  --color-base-200: oklch(96% 0.001 286.375);
-  --color-base-300: oklch(92% 0.004 286.32);
-  --color-base-content: oklch(21% 0.006 285.885);
-  --color-primary: oklch(78% 0.115 274.713);
-  --color-primary-content: oklch(25% 0.09 281.288);
-  --color-secondary: oklch(82% 0.12 346.018);
-  --color-secondary-content: oklch(28% 0.109 3.907);
-  --color-accent: oklch(80% 0.105 251.813);
-  --color-accent-content: oklch(28% 0.091 267.935);
-  --color-neutral: oklch(27% 0.006 286.033);
-  --color-neutral-content: oklch(98% 0 0);
-  --color-info: oklch(62% 0.214 259.815);
-  --color-info-content: oklch(97% 0.014 254.604);
-  --color-success: oklch(76% 0.233 130.85);
-  --color-success-content: oklch(98% 0.031 120.757);
-  --color-warning: oklch(70% 0.213 47.604);
-  --color-warning-content: oklch(98% 0.016 73.684);
-  --color-error: oklch(64% 0.246 16.439);
-  --color-error-content: oklch(96% 0.015 12.422);
-  --radius-selector: 1rem;
-  --radius-field: 2rem;
-  --radius-box: 1rem;
-  --size-selector: 0.25rem;
-  --size-field: 0.15rem;
-  --border: 1px;
-  --depth: 0;
-  --noise: 0;
-
-  
-
-  /*
-  /*Customs vars*/
- 
-
+* {
+  border-color: #dddddd78 !important;
 }
 
-
-
-
-@plugin "daisyui/theme" {
-  name: "silk";
-  default: false;
-  prefersdark: false;
-  color-scheme: "light";
-  --color-base-100: oklch(98% 0.002 247.839);
-  --color-base-200: oklch(96% 0.003 264.542);
-  --color-base-300: oklch(92% 0.006 264.531);
-  --color-base-content: oklch(21% 0.034 264.665);
-  --color-primary: oklch(51% 0.262 276.966);
-  --color-primary-content: oklch(96% 0.018 272.314);
-  --color-secondary: oklch(60% 0.118 184.704);
-  --color-secondary-content: oklch(98% 0.014 180.72);
-  --color-accent: oklch(59% 0.249 0.584);
-  --color-accent-content: oklch(97% 0.014 343.198);
-  --color-neutral: oklch(13% 0.028 261.692);
-  --color-neutral-content: oklch(98% 0.002 247.839);
-  --color-info: oklch(58% 0.158 241.966);
-  --color-info-content: oklch(97% 0.013 236.62);
-  --color-success: oklch(60% 0.118 184.704);
-  --color-success-content: oklch(98% 0.014 180.72);
-  --color-warning: oklch(64% 0.222 41.116);
-  --color-warning-content: oklch(98% 0.016 73.684);
-  --color-error: oklch(57% 0.245 27.325);
-  --color-error-content: oklch(97% 0.013 17.38);
-  --radius-selector: 1rem;
-  --radius-field: 1rem;
-  --radius-box: 0.5rem;
-  --size-selector: 0.25rem;
-  --size-field: 0.25rem;
-  --border: 0.5px;
-  --depth: 1;
-  --noise: 0;
-}
-
-
-
-@theme {
-  --color-background: 'hsl(var(--background))';
-  --color-foreground: 'hsl(var(--foreground))';
-  --color-card: 'hsl(var(--card))';
-  --color-card-foreground: 'hsl(var(--card-foreground))';
-  --color-popover: 'hsl(var(--popover))';
-  --color-popover-foreground: 'hsl(var(--popover-foreground))';
-  --color-primary: 'hsl(var(--primary))';
-  --color-primary-foreground: 'hsl(var(--primary-foreground))';
-  --color-secondary: 'hsl(var(--secondary))';
-  --color-secondary-foreground: 'hsl(var(--secondary-foreground))';
-  --color-muted: 'hsl(var(--muted))';
-  --color-muted-foreground: 'hsl(var(--muted-foreground))';
-  --color-accent: 'hsl(var(--accent))';
-  --color-accent-foreground: 'hsl(var(--accent-foreground))';
-  --color-destructive: 'hsl(var(--destructive))';
-  --color-destructive-foreground: 'hsl(var(--destructive-foreground))';
-  --color-border: 'hsl(var(--border))';
-  --color-input: 'hsl(var(--input))';
-  --color-ring: 'hsl(var(--ring))';
-  --color-chart-1: 'hsl(var(--chart-1))';
-  --color-chart-2: 'hsl(var(--chart-2))';
-  --color-chart-3: 'hsl(var(--chart-3))';
-  --color-chart-4: 'hsl(var(--chart-4))';
-  --color-chart-5: 'hsl(var(--chart-5))';
-  --color-sidebar-background: 'hsl(var(--sidebar-background))';
-  --color-sidebar-foreground: 'hsl(var(--sidebar-foreground))';
-  --color-sidebar-primary: 'hsl(var(--sidebar-primary))';
-  --color-sidebar-primary-foreground: 'hsl(var(--sidebar-primary-foreground))';
-  --color-sidebar-accent: 'hsl(var(--sidebar-accent))';
-  --color-sidebar-accent-foreground: 'hsl(var(--sidebar-accent-foreground))';
-  --color-sidebar-border: 'hsl(var(--sidebar-border))';
-  --color-sidebar-ring: 'hsl(var(--sidebar-ring))';
-
-  --color-fd-background: 0 0% 100%;
-  --color-fd-foreground: 222.2 47.4% 11.2%;
- 
-  --color-fd-muted: 210 40% 96.1%;
-  --color-fd-muted-foreground: 215.4 16.3% 46.9%;
-
-}
-
-
-
-@plugin "daisyui/theme" {
-  name: "bumblebee";
-  default: false;
-  prefersdark: false;
-  color-scheme: "light";
-  --color-base-100: oklch(100% 0 0);
-  --color-base-200: oklch(97% 0 0);
-  --color-base-300: oklch(92% 0 0);
-  --color-base-content: oklch(20% 0 0);
-  --color-primary: oklch(85% 0.199 91.936);
-  --color-primary-content: oklch(42% 0.095 57.708);
-  --color-secondary: oklch(75% 0.183 55.934);
-  --color-secondary-content: oklch(40% 0.123 38.172);
-  --color-accent: oklch(0% 0 0);
-  --color-accent-content: oklch(100% 0 0);
-  --color-neutral: oklch(37% 0.01 67.558);
-  --color-neutral-content: oklch(92% 0.003 48.717);
-  --color-info: oklch(74% 0.16 232.661);
-  --color-info-content: oklch(39% 0.09 240.876);
-  --color-success: oklch(76% 0.177 163.223);
-  --color-success-content: oklch(37% 0.077 168.94);
-  --color-warning: oklch(82% 0.189 84.429);
-  --color-warning-content: oklch(41% 0.112 45.904);
-  --color-error: oklch(70% 0.191 22.216);
-  --color-error-content: oklch(39% 0.141 25.723);
-  --radius-selector: 1rem;
-  --radius-field: 0.5rem;
-  --radius-box: 1rem;
-  --size-selector: 0.25rem;
-  --size-field: 0.25rem;
-  --border: 1px;
-  --depth: 1;
-  --noise: 0;
-}
 
 
 
@@ -242,6 +123,13 @@
 }
 .text-ln-gray-450 {
   --tw-text-opacity: 1;
-  color: rgb(163 163 163 / var(--tw-text-opacity));
+  color: rgb(96 96 96);
 }
 
+
+button[data-state="active"] {
+  @apply bg-primary text-white
+}
+button[data-state="active"] span {
+  color:#FFF;
+}

@@ -52,10 +52,7 @@ figure.fd-codeblock {
   }
   
 
-  body {
-    background-color:hsl(var(--background));
-    color:hsl(var(--foreground))
-  }
+ 
   .container {
     width:100%;
     margin-right:auto;
@@ -1351,9 +1348,7 @@ figure.fd-codeblock {
   .border-fd-border\/50 {
     border-color:hsl(var(--border)/.5)
   }
-  .border-fd-foreground\/10 {
-    border-color:hsl(var(--foreground)/.1)
-  }
+
   .border-input {
     border-color:hsl(var(--input))
   }
