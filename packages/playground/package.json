@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "clarity": "workspace:*",
+    "daisyui": "workspace:*",
     "@hookform/resolvers": "^3.9.0",
     "@monaco-editor/react": "^4.6.0",
     "@next/swc-wasm-nodejs": "13.5.1",

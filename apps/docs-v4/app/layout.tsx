@@ -1,4 +1,5 @@
 import './fd.css';
+import '../../../packages/daisy-5/packages/daisyui/daisyui.css'
 import "./global.css"
 
 import type { ReactNode } from "react"
@@ -19,7 +20,7 @@ import { cn } from "@/registry/default/lib/utils"
 //import '../../../packages/clarity/dist/styled.css'
 //import '../../../packages/clarity/dist/full.css'
 
-import '../../../packages/daisy-5/packages/daisyui/daisyui.css'
+
 import './themes.css'
 
 
@@ -91,7 +92,7 @@ export default function Layout({ children }: { children: ReactNode }) {
       lang="en"
       className={cn( avenir.className)}
       suppressHydrationWarning
-      data-theme="silk"
+      data-theme="bumblebee"
     >
       <body className="flex flex-col min-h-svh font-sans antialiased">
         <RootProvider>{children}</RootProvider>

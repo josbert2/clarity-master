@@ -1,4 +1,7 @@
 
+.btn-test{
+  background-color: saddlebrown!important
+}
 .btn {
 
   @apply inline-flex shrink-0 cursor-pointer flex-nowrap items-center justify-center gap-1.5 text-center align-middle no-underline outline-offset-2 select-none;
